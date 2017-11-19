@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FailureSimulator.Core", "FailureSimulator.Core\FailureSimulator.Core.csproj", "{38E8C441-2673-4CEB-AB76-508462BCA9E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FailureSimulator.Console", "FailureSimulator.Console\FailureSimulator.Console.csproj", "{37431F6A-C98B-48CC-AFAB-66A8DA448549}"
+	ProjectSection(ProjectDependencies) = postProject
+		{38E8C441-2673-4CEB-AB76-508462BCA9E8} = {38E8C441-2673-4CEB-AB76-508462BCA9E8}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
