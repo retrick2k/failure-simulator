@@ -26,13 +26,9 @@
         public Vertex Vertex { get; private set; }
 
 
-        public Edge(Vertex vertex)
+        public Edge(Vertex vertex, double length = 0, double intensiy = 0)
         {
             Vertex = vertex;
-        }
-
-        public Edge(Vertex vertex, double length, double intensiy) : this(vertex)
-        {
             Length = length;
             SpecificIntensity = intensiy;
         }

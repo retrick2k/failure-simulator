@@ -5,24 +5,25 @@ using System.Linq;
 namespace FailureSimulator.Core.Graph
 {
 
-    /*
-    *                        ВНИМАНИЕ
-    * Данная реализация может привести к проблемам с целостностью
-    *
-    * 1. Можно спокойно добавлять/удалять вершины
-    * 2. Можно спокойно менять свойства вершин, ОСОБЕННО ИМЯ
-    * 3. Можно спокойно удалять/добавлять ребра у вершин
-    */
-
+    /* Да, я использую List<T>, вместо Dictionary<K, T>
+     * 
+     * 1. Можно переименовывать вершину и это не разрушит целостность
+     * 2. По номеру вершины (полученному, например, из мат. представления, алгоритма
+     *    поиска пути и т.п.) можно получить имя вершины (ладно, можно и по словарю)
+     */ 
+    
     /// <summary>
     /// Объект графа
     /// </summary>
     public class Graph
     {
+        private List<Vertex> _vertex;
+
         /// <summary>
         /// Список вершин графа
         /// </summary>
-        public Dictionary<string, Vertex> Vertex { get; private set; }
+        //public Dictionary<string, Vertex> Vertex { get; private set; }
+        public IReadOnlyCollection<Vertex> Vertex => _vertex.AsReadOnly();
 
         /// <summary>
         /// Список элементов, из которых состоят вершины (узлы)
@@ -31,7 +32,7 @@ namespace FailureSimulator.Core.Graph
 
         public Graph()
         {
-            Vertex = new Dictionary<string, Vertex>();
+            _vertex = new List<Vertex>();
             Elements = new List<Element>();
         }
 
@@ -45,10 +46,10 @@ namespace FailureSimulator.Core.Graph
             if (vertex == null)
                 throw new ArgumentNullException(nameof(vertex));
 
-            if (Vertex.ContainsKey(vertex.Name))
+            if (_getVertex(vertex.Name)!=null)
                 throw new ArgumentException($"Граф уже содержит вершину с именем {vertex.Name}");
 
-            Vertex.Add(vertex.Name, vertex);
+            _vertex.Add(vertex);
         }
 
         /// <summary>
@@ -64,10 +65,7 @@ namespace FailureSimulator.Core.Graph
             AssertVertexName(vertexA);
             AssertVertexName(vertexB);
 
-            var edge = new Edge(Vertex[vertexB], length, intensity);
-            Vertex[vertexA].Edges.Add(edge);
-
-            return edge;
+            return _getVertex(vertexA).AddEdge(_getVertex(vertexB), length, intensity);
         }
 
         /// <summary>
@@ -92,19 +90,19 @@ namespace FailureSimulator.Core.Graph
             if (vertexName == null)
                 throw new ArgumentNullException(nameof(vertexName));
 
-            if (!Vertex.ContainsKey(vertexName))
+            if (_getVertex(vertexName)!=null)
                 throw new ArgumentException($"Вершина {vertexName} отсутствует в графе");
 
 
             // Удаляем из списка вершин
-            Vertex.Remove(vertexName);
+            _vertex.Remove(_getVertex(vertexName));
 
             // Но еще надо пройтись по всем ребрам и удалить ребра, ведущие к этой вершине
             foreach (var vert in Vertex)
             {
-                var edge = vert.Value.GetEdge(vertexName);
+                var edge = vert.GetEdge(vertexName);
                 if (edge != null)
-                    vert.Value.Edges.Remove(edge);
+                    vert.RemoveEdge(edge);
             }
         }
 
@@ -119,40 +117,26 @@ namespace FailureSimulator.Core.Graph
             AssertVertexName(vertexA);
             AssertVertexName(vertexB);
 
-            var a = Vertex[vertexA];
-            var edge = a.GetEdge(vertexB);
-            if (edge == null)
-                throw new ArgumentException($"Ребро {vertexA} - {vertexB} отсутствует в графе");
-
-            a.Edges.Remove(edge);
-        }
-
-
-        /// <summary>
-        /// Переименовывает вершину
-        /// </summary>
-        /// <param name="oldName"></param>
-        /// <param name="newName"></param>
-        public void RenameVertex(string oldName, string newName)
-        {
-            AssertVertexName(oldName);
-
-            var vertex = Vertex[oldName];
-            vertex.Name = newName;
-            Vertex.Remove(oldName);
-            AddVertex(vertex);
+            _getVertex(vertexA).RemoveEdge(vertexB);
         }
 
 
         /// <summary>
         /// Возвращает вершину с заданным именем
         /// </summary>
-        /// <param name="name">Имя вершины</param>
+        /// <param name="vertexName">Имя вершины</param>
         /// <returns>Вершина</returns>
-        public Vertex GetVertex(string name)
+        public Vertex GetVertex(string vertexName)
         {
-            AssertVertexName(name);
-            return Vertex[name];
+            if(vertexName == null)
+                throw new ArgumentNullException(nameof(vertexName));
+
+            return _getVertex(vertexName);
+        }
+
+        private Vertex _getVertex(string vertexName)
+        {
+            return _vertex.FirstOrDefault(x => x.Name == vertexName);
         }
 
 
@@ -166,9 +150,10 @@ namespace FailureSimulator.Core.Graph
             if (vertexName == null)
                 throw new ArgumentNullException(nameof(vertexName));
 
-            if (!Vertex.ContainsKey(vertexName))
+            if (GetVertex(vertexName) == null)
                 throw new ArgumentException($"Вершина {vertexName} отсутствует в графе");
         }
+
     }
 
 }
