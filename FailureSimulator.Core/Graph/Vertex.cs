@@ -23,9 +23,14 @@ namespace FailureSimulator.Core.Graph
 
 
         /// <summary>
+        /// Интенсивность отказов узла
+        /// </summary>
+        public double Intensity => Elements.Sum(e => e.Amount * e.Element.Intensity);
+
+        /// <summary>
         /// Список ориентированных ребер, выходящих из вершины
         /// </summary>
-        public IReadOnlyCollection<Edge> Edges => _edges.AsReadOnly();
+        public IReadOnlyList<Edge> Edges => _edges.AsReadOnly();
 
 
         public Vertex(string name)
@@ -66,15 +71,17 @@ namespace FailureSimulator.Core.Graph
         /// <summary>
         /// Удаляет ребро, ведущее к заданной вершине
         /// </summary>
-        /// <param name="other">Имя вершины, к которой идет ребро</param>
-        public void RemoveEdge(string other)
+        /// <param name="otherName">Имя вершины, к которой идет ребро</param>
+        /// <exception cref="ArgumentNullException">otherName - null</exception>
+        /// <exception cref="ArgumentException">Указанное ребро отсутствует в графе</exception>
+        public void RemoveEdge(string otherName)
         {
-            if(other == null)
-                throw new ArgumentException(nameof(other));
+            if(otherName == null)
+                throw new ArgumentException(nameof(otherName));
 
-            var edge = GetEdge(other);
+            var edge = GetEdge(otherName);
             if(edge == null)
-                throw new ArgumentException($"Ребро {Name} - {other} отсутствует в графе");
+                throw new ArgumentException($"Ребро {Name} - {otherName} отсутствует в графе");
         }
 
 
@@ -82,6 +89,7 @@ namespace FailureSimulator.Core.Graph
         /// Удаляет заданное ребро
         /// </summary>
         /// <param name="edge">Ребро, которое надо удалить</param>
+        /// <exception cref="ArgumentNullException">edge - null</exception>
         public void RemoveEdge(Edge edge)
         {
             if(edge == null)
@@ -98,6 +106,16 @@ namespace FailureSimulator.Core.Graph
         public Edge GetEdge(string otherName)
         {
             return Edges.FirstOrDefault(x => x.Vertex.Name == otherName);
+        }
+
+        /// <summary>
+        /// Находит ребро, выходящее из текущей вершины к заданной
+        /// </summary>
+        /// <param name="otherName">Вершины, куда входит ребро</param>
+        /// <returns>Ребро; null, если не найдено</returns>
+        public Edge GetEdge(Vertex otherVertex)
+        {
+            return Edges.FirstOrDefault(x => x.Vertex == otherVertex);
         }
 
         public override string ToString()
