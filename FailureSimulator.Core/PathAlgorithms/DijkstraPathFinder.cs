@@ -4,7 +4,7 @@ using FailureSimulator.Core.AbstractPathAlgorithms;
 
 namespace FailureSimulator.Core.PathAlgorithms
 {
-    public class DijkstraPathFinder : IPathFinder
+    public class DijkstraPathFinder : IShortestPathFinder
     {
         public List<int> GetPath(ComputationGraph.ComputationGraph graph, int startVertex, int endVertex)
         {

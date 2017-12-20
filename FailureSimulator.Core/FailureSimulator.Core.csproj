@@ -44,11 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractPathAlgorithms\IPathFinder.cs" />
+    <Compile Include="AbstractPathAlgorithms\IShortestPathFinder.cs" />
     <Compile Include="ComputationGraph\ComputationGraph.cs" />
     <Compile Include="Graph\Edge.cs" />
     <Compile Include="Graph\Element.cs" />
     <Compile Include="Graph\Graph.cs" />
     <Compile Include="Graph\Vertex.cs" />
+    <Compile Include="PathAlgorithms\DfsPathFinder.cs" />
     <Compile Include="PathAlgorithms\DijkstraPathFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

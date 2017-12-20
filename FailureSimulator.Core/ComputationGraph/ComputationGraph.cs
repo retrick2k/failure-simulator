@@ -58,7 +58,7 @@ namespace FailureSimulator.Core.ComputationGraph
         /// Возвращает длину пути между двумя вершинами
         /// </summary>
         /// <param name="a">Индекс начальной вершины</param>
-        /// <param name="b">Индекс< конечной вершины</param>
+        /// <param name="b">Индекс конечной вершины</param>
         /// <returns>Длина пути, PositiveInfinity, если пути нет</returns>
         public double GetEdgeLength(int a, int b)
         {
@@ -70,6 +70,17 @@ namespace FailureSimulator.Core.ComputationGraph
                     return edges[i].length;
 
             return double.PositiveInfinity;
+        }
+
+
+        /// <summary>
+        //  Возвращает исходящие связи из вершины к соседям
+        /// </summary>
+        /// <param name="vertexIndex">Индекс вершины</param>
+        /// <returns>Массив кортежей (длина связи; индекс связанной вершины) </returns>
+        public (double length, int vertex)[] GetNeighbours(int vertexIndex)
+        {
+            return _list[vertexIndex];
         }
     }
 }

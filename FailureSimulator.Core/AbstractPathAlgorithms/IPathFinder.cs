@@ -2,15 +2,21 @@
 
 namespace FailureSimulator.Core.AbstractPathAlgorithms
 {
+    /// <summary>
+    /// Находит все пути на графе.
+    /// Проверяет наличие хотя бы одного пути на изменившемся графе.
+    /// </summary>
     public interface IPathFinder
     {
         /// <summary>
-        /// Находит кратчайший маршрут на графе
+        /// Возвращает список всех возможных изначальных путей
         /// </summary>
-        /// <param name="graph">Граф</param>
-        /// <param name="startVertex">Индекс начальной вершины</param>
-        /// <param name="endVertex">Индекс конечной вершины</param>
-        /// <returns>Список индексов вершин, составляющих путь. null, если путь не найден</returns>
-        List<int> GetPath(ComputationGraph.ComputationGraph graph, int startVertex, int endVertex);
+        IReadOnlyList<IReadOnlyList<int>> AllPathes { get; }
+
+        /// <summary>
+        /// Остался ли хоть один путь
+        /// </summary>
+        /// <returns></returns>
+        bool IsAnyPathAlive();
     }
 }
