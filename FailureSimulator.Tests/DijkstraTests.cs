@@ -30,7 +30,7 @@ namespace FailureSimulator.Tests
             var dijstra = new DijkstraPathFinder();
             var path  = dijstra.GetPath(cGraph, 0, 4);
 
-            CollectionAssert.AreEqual(path, new List<int>(){0,2,3,4});
+            CollectionAssert.AreEqual(new List<int>(){0,2,3,4}, path);
         }
 
         [TestMethod]
@@ -54,7 +54,7 @@ namespace FailureSimulator.Tests
             var dijstra = new DijkstraPathFinder();
             var path = dijstra.GetPath(cGraph, 1, 2);
 
-            CollectionAssert.AreEqual(path, new List<int>() { 1, 0, 2 });
+            CollectionAssert.AreEqual(new List<int>() { 1, 0, 2 }, path);
         }
 
         [TestMethod]

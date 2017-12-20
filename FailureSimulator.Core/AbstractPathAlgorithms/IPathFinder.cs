@@ -16,5 +16,14 @@ namespace FailureSimulator.Core.AbstractPathAlgorithms
         /// <param name="end">Конечная вершина</param>
         /// <returns>Список путей; путь - список вершин</returns>
         IReadOnlyList<IReadOnlyList<Vertex>> FindAllPathes(Graph.Graph graph, Vertex start, Vertex end);
+
+        /// <summary>
+        /// Возвращает список всех путей от одной вершины до другой
+        /// </summary>
+        /// <param name="graph">Граф</param>
+        /// <param name="start">Имя начальной вершина</param>
+        /// <param name="end">Имя конечной вершина</param>
+        /// <returns>Список путей; путь - список вершин</returns>
+        IReadOnlyList<IReadOnlyList<Vertex>> FindAllPathes(Graph.Graph graph, string start, string end);
     }
 }

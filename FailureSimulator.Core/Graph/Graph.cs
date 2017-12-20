@@ -44,9 +44,10 @@ namespace FailureSimulator.Core.Graph
         /// Добавляет новую вершину в граф
         /// </summary>
         /// <param name="vertex">Вершина</param>
+        /// <returns>Добавленную вершину</returns>
         /// <exception cref="ArgumentNullException">vertex - NULL</exception>
         /// <exception cref="ArgumentException">Граф уже содержит указанную вершину</exception>
-        public void AddVertex(Vertex vertex)
+        public Vertex AddVertex(Vertex vertex)
         {
             if (vertex == null)
                 throw new ArgumentNullException(nameof(vertex));
@@ -55,6 +56,8 @@ namespace FailureSimulator.Core.Graph
                 throw new ArgumentException($"Граф уже содержит вершину с именем {vertex.Name}");
 
             _vertex.Add(vertex);
+
+            return vertex;
         }
 
 

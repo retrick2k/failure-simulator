@@ -9,7 +9,7 @@ namespace FailureSimulator.Core.PathAlgorithms
     /// <summary>
     /// Находит все пути на графе.
     /// </summary>
-    public class DfsPathFinder
+    public class DfsPathFinder : IPathFinder
     {
         /// <summary>
         /// Возвращает список всех путей от одной вершины до другой
@@ -31,6 +31,20 @@ namespace FailureSimulator.Core.PathAlgorithms
             return pathes.ToList().AsReadOnly();
         }
 
+        /// <summary>
+        /// Возвращает список всех путей от одной вершины до другой
+        /// </summary>
+        /// <param name="graph">Граф</param>
+        /// <param name="start">Имя начальной вершина</param>
+        /// <param name="end">Имя конечной вершина</param>
+        /// <returns>Список путей; путь - список вершин</returns>
+        public IReadOnlyList<IReadOnlyList<Vertex>> FindAllPathes(Graph.Graph graph, string start, string end)
+        {
+            Vertex startVertex = graph.GetVertex(start);
+            Vertex endVertex = graph.GetVertex(end);
+            return FindAllPathes(graph, startVertex, endVertex);
+        }
+
         /* Поиск в глубину и составление пути
          *  1. Каждый раз, когда проходим очередную вершину, добавляем ее
          *     во временный path
@@ -45,7 +59,7 @@ namespace FailureSimulator.Core.PathAlgorithms
          *  Мы отмечаем вершину в начале ф-ии и снимаем отметку в конце. Таким образом, вершина
          *  однократно посещается, но не вообще, а только в пределах текущего пути (т.е. в одном пути
          *  вершина встречается один раз, но может встречаться в нескольких
-         */ 
+         */
         void dfs(Vertex currentVertex,  (Dictionary<Vertex, bool> isVisted, LinkedList<List<Vertex>> pathes, LinkedList<Vertex> path, Vertex target) common)
         {
             common.isVisted[currentVertex] = true;
@@ -55,6 +69,7 @@ namespace FailureSimulator.Core.PathAlgorithms
             {
                 common.pathes.AddLast(common.path.ToList());
                 common.path.RemoveLast();
+                common.isVisted[currentVertex] = false;
                 return;
             }
 
@@ -63,10 +78,10 @@ namespace FailureSimulator.Core.PathAlgorithms
                 if (common.isVisted[edge.Vertex])
                     continue;
 
-                dfs(currentVertex, common);
+                dfs(edge.Vertex, common);
             }
 
-            common.isVisted[currentVertex] = true;
+            common.isVisted[currentVertex] = false;
             common.path.RemoveLast();
         }
     }
