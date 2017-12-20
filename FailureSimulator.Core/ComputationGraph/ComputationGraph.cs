@@ -39,10 +39,8 @@ namespace FailureSimulator.Core.ComputationGraph
                 {
                     var edge = vertex.Edges[edgeIndex];
                     _list[vertexIndex][edgeIndex] = (edge.Length, graph.GetVertexIndex(edge.Vertex));
-                    edgeIndex++;
                 }
-
-                vertexIndex++;
+                
             }
         }
 

@@ -33,10 +33,10 @@ namespace FailureSimulator.Core.PathAlgorithms
                 for (int i = 0; i < graph.VertexCount; i++)
                 {
                     double length = graph.GetEdgeLength(minIndex, i);
-                    if (!double.IsInfinity(length))
+                    if (!double.IsInfinity(length) && !isVisited[i])
                     {
                         double newDist = dists[minIndex] + length;
-                        if (dists[i] < newDist)
+                        if (newDist < dists[i])
                         {
                             dists[i] = newDist;
                             path[i] = minIndex;

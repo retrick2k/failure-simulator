@@ -63,7 +63,7 @@ namespace FailureSimulator.Core.Graph
         public void RemoveEdge(Vertex other)
         {
             if (other == null)
-                throw new ArgumentException(nameof(other));
+                throw new ArgumentNullException(nameof(other));
 
             RemoveEdge(other.Name);
         }
@@ -77,11 +77,13 @@ namespace FailureSimulator.Core.Graph
         public void RemoveEdge(string otherName)
         {
             if(otherName == null)
-                throw new ArgumentException(nameof(otherName));
+                throw new ArgumentNullException(nameof(otherName));
 
             var edge = GetEdge(otherName);
             if(edge == null)
                 throw new ArgumentException($"Ребро {Name} - {otherName} отсутствует в графе");
+
+            _edges.Remove(edge);
         }
 
 
@@ -95,6 +97,9 @@ namespace FailureSimulator.Core.Graph
             if(edge == null)
                 throw new ArgumentNullException(nameof(edge));
 
+            if(!_edges.Contains(edge))
+                throw new ArgumentException($"Ребро {Name} - {edge.Vertex.Name} отсутствует в графе");
+
             _edges.Remove(edge);
         }
 
@@ -105,6 +110,9 @@ namespace FailureSimulator.Core.Graph
         /// <returns>Ребро; null, если не найдено</returns>
         public Edge GetEdge(string otherName)
         {
+            if(otherName == null)
+                throw new ArgumentNullException(nameof(otherName));
+
             return Edges.FirstOrDefault(x => x.Vertex.Name == otherName);
         }
 
@@ -115,6 +123,9 @@ namespace FailureSimulator.Core.Graph
         /// <returns>Ребро; null, если не найдено</returns>
         public Edge GetEdge(Vertex otherVertex)
         {
+            if(otherVertex == null)
+                throw new ArgumentNullException(nameof(otherVertex));
+
             return Edges.FirstOrDefault(x => x.Vertex == otherVertex);
         }
 

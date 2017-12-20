@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FailureSimulator.Console", 
 		{38E8C441-2673-4CEB-AB76-508462BCA9E8} = {38E8C441-2673-4CEB-AB76-508462BCA9E8}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FailureSimulator.Tests", "FailureSimulator.Tests\FailureSimulator.Tests.csproj", "{43E3C873-83D2-44AE-93F0-2A7D31072FF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{37431F6A-C98B-48CC-AFAB-66A8DA448549}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37431F6A-C98B-48CC-AFAB-66A8DA448549}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37431F6A-C98B-48CC-AFAB-66A8DA448549}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43E3C873-83D2-44AE-93F0-2A7D31072FF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43E3C873-83D2-44AE-93F0-2A7D31072FF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43E3C873-83D2-44AE-93F0-2A7D31072FF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43E3C873-83D2-44AE-93F0-2A7D31072FF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

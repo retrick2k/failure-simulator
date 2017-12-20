@@ -1,0 +1,33 @@
+﻿using System;
+using System.Linq;
+using FailureSimulator.Core.Graph;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+
+namespace FailureSimulator.Tests
+{
+    [TestClass]
+    public class EdgeTests
+    {
+        [TestMethod]
+        public void CreateEdge_ok()
+        {
+            var vertex = new Vertex("vertex");
+            var edge = new Edge(vertex, 2, 0.5);
+
+            Assert.AreEqual(vertex, edge.Vertex);
+            Assert.AreEqual(2, edge.Length);
+            Assert.AreEqual(0.5, edge.SpecificIntensity);
+        }
+
+
+        [TestMethod]
+        public void Intensity()
+        {
+            var vertex = new Vertex("vertex");
+            var edge = new Edge(vertex, 2, 0.5);
+
+            Assert.AreEqual(2 * 0.5, edge.Intensity);
+        }
+    }
+}

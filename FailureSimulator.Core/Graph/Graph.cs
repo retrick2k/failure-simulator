@@ -255,6 +255,9 @@ namespace FailureSimulator.Core.Graph
         /// <param name="vertex"></param>
         public void AssertVertexExists(Vertex vertex)
         {
+            if(vertex == null)
+                throw new ArgumentNullException(nameof(vertex));
+
             if(!_vertex.Contains(vertex))
                 throw new ArgumentException($"Вершина {vertex.Name} отсутствует в графе");
         }
