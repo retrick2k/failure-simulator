@@ -1,22 +1,20 @@
 ﻿using System.Collections.Generic;
+using FailureSimulator.Core.Graph;
 
 namespace FailureSimulator.Core.AbstractPathAlgorithms
 {
     /// <summary>
-    /// Находит все пути на графе.
-    /// Проверяет наличие хотя бы одного пути на изменившемся графе.
+    /// Находит все пути на графе от одной вершине к другой
     /// </summary>
     public interface IPathFinder
     {
         /// <summary>
-        /// Возвращает список всех возможных изначальных путей
+        /// Возвращает список всех путей от одной вершины до другой
         /// </summary>
-        IReadOnlyList<IReadOnlyList<int>> AllPathes { get; }
-
-        /// <summary>
-        /// Остался ли хоть один путь
-        /// </summary>
-        /// <returns></returns>
-        bool IsAnyPathAlive();
+        /// <param name="graph">Граф</param>
+        /// <param name="start">Начальная вершина</param>
+        /// <param name="end">Конечная вершина</param>
+        /// <returns>Список путей; путь - список вершин</returns>
+        IReadOnlyList<IReadOnlyList<Vertex>> FindAllPathes(Graph.Graph graph, Vertex start, Vertex end);
     }
 }

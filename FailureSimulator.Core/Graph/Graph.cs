@@ -38,6 +38,8 @@ namespace FailureSimulator.Core.Graph
         }
 
 
+        #region EDIT GRAPH
+
         /// <summary>
         /// Добавляет новую вершину в граф
         /// </summary>
@@ -172,6 +174,8 @@ namespace FailureSimulator.Core.Graph
             vertexA.RemoveEdge(vertexB);
         }
 
+        #endregion
+
 
         /// <summary>
         /// Возвращает вершину с заданным именем
@@ -227,6 +231,34 @@ namespace FailureSimulator.Core.Graph
             throw new ArgumentException($"Вершина {vertexName} отсутствует в графе");
         }
 
+
+        /// <summary>
+        /// Возвращает ребро между двумя вершинами, если оно существует
+        /// </summary>
+        /// <param name="vertexA">Вершина, из которой выходит ребро</param>
+        /// <param name="vertexB">Вершина, в которую входит ребро</param>
+        /// <returns>Ребро, null, если ребра нет</returns>
+        public Edge GetEdge(Vertex vertexA, Vertex vertexB)
+        {
+            AssertVertexExists(vertexA);
+            AssertVertexExists(vertexB);
+
+            return vertexA.GetEdge(vertexB);
+        }
+
+        /// <summary>
+        /// Возвращает ребро между двумя вершинами, если оно существует
+        /// </summary>
+        /// <param name="vertexA">Вершина, из которой выходит ребро</param>
+        /// <param name="vertexB">Вершина, в которую входит ребро</param>
+        /// <returns>Ребро, null, если ребра нет</returns>
+        public Edge GetEdge(string vertexA, string vertexB)
+        {
+            AssertVertexExists(vertexA);
+            AssertVertexExists(vertexB);
+
+            return _getVertex(vertexA).GetEdge(vertexB);
+        }
 
         ///////////////////////////////////////////////////////////////////////////////////////////
 

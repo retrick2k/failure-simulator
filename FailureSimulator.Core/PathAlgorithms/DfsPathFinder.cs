@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using FailureSimulator.Core.Graph;
 using System.Reflection;
 using FailureSimulator.Core.AbstractPathAlgorithms;
 
@@ -7,35 +8,27 @@ namespace FailureSimulator.Core.PathAlgorithms
 {
     /// <summary>
     /// Находит все пути на графе.
-    /// Проверяет наличие хотя бы одного пути на изменившемся графе.
     /// </summary>
-    public class DfsPathFinder : IPathFinder
+    public class DfsPathFinder
     {
-        private readonly ComputationGraph.ComputationGraph _graph;
-        private readonly List<List<int>> _pathes;
-
-
-        public DfsPathFinder(ComputationGraph.ComputationGraph graph, int start, int end)
+        /// <summary>
+        /// Возвращает список всех путей от одной вершины до другой
+        /// </summary>
+        /// <param name="graph">Граф</param>
+        /// <param name="start">Начальная вершина</param>
+        /// <param name="end">Конечная вершина</param>
+        /// <returns>Список путей; путь - список вершин</returns>
+        public IReadOnlyList<IReadOnlyList<Vertex>> FindAllPathes(Graph.Graph graph, Vertex start, Vertex end)
         {
-            _graph = graph;
-            FindAllPathes(start, end);
-        }
+            var isVisited = new Dictionary<Vertex, bool>();
+            var pathes = new LinkedList<List<Vertex>>();
+            var path = new LinkedList<Vertex>();
 
-        public IReadOnlyList<IReadOnlyList<int>> AllPathes { get; }
-        public bool IsAnyPathAlive()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        
-        // Находит все пути, используя поиск в глубину
-        private void FindAllPathes(int start, int end)
-        {
-            bool[] isVisited = new bool[_graph.VertexCount];
-            var pathes = new LinkedList<List<int>>();
-            var path = new LinkedList<int>();
-
+            foreach (var vertex in graph.Vertex)
+                isVisited.Add(vertex, false);
+            
             dfs(start, (isVisited, pathes, path, end));
+            return pathes.ToList().AsReadOnly();
         }
 
         /* Поиск в глубину и составление пути
@@ -53,7 +46,7 @@ namespace FailureSimulator.Core.PathAlgorithms
          *  однократно посещается, но не вообще, а только в пределах текущего пути (т.е. в одном пути
          *  вершина встречается один раз, но может встречаться в нескольких
          */ 
-        void dfs(int currentVertex,  (bool[] isVisted, LinkedList<List<int>> pathes, LinkedList<int> path, int target) common)
+        void dfs(Vertex currentVertex,  (Dictionary<Vertex, bool> isVisted, LinkedList<List<Vertex>> pathes, LinkedList<Vertex> path, Vertex target) common)
         {
             common.isVisted[currentVertex] = true;
             common.path.AddLast(currentVertex);
@@ -65,10 +58,9 @@ namespace FailureSimulator.Core.PathAlgorithms
                 return;
             }
 
-            var neighbours = _graph.GetNeighbours(currentVertex);
-            foreach (var edge in neighbours)
+            foreach (var edge in currentVertex.Edges)
             {
-                if (common.isVisted[edge.vertex])
+                if (common.isVisted[edge.Vertex])
                     continue;
 
                 dfs(currentVertex, common);
