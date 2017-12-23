@@ -49,7 +49,12 @@
     <Compile Include="Graph\Graph.cs" />
     <Compile Include="Graph\Vertex.cs" />
     <Compile Include="PathAlgorithms\DfsPathFinder.cs" />
+    <Compile Include="Probability\BaseDistribution.cs" />
+    <Compile Include="Probability\ExponentialDistribution.cs" />
+    <Compile Include="Probability\IDistribution.cs" />
+    <Compile Include="Probability\UniformDistribution.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Simulator\ComputationGraph.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
