@@ -28,17 +28,17 @@
         /// <summary>
         /// Вершина, в которую направлено ребро
         /// </summary>
-        public GraphUnit GraphUnit { get; private set; }
+        public Vertex Vertex { get; private set; }
 
 
-        public Edge(GraphUnit graphUnit, double length = 0, double intensiy = 0)
+        public Edge(Vertex vertex, double length = 0, double intensiy = 0)
         {
-            GraphUnit = graphUnit;
+            Vertex = vertex;
             Length = length;
             SpecificFailIntensity = intensiy;
         }
 
-        public override string ToString() => $"{GraphUnit.Name} ({Length})";
+        public override string ToString() => $"{Vertex.Name} ({Length})";
 
     }
 }

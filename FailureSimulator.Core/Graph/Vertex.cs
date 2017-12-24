@@ -7,7 +7,7 @@ namespace FailureSimulator.Core.Graph
     /// <summary>
     /// Узел (вершина) графа
     /// </summary>
-    public class GraphUnit : IGraphUnit
+    public class Vertex : IGraphUnit
     {
         private List<Edge> _edges;
 
@@ -38,7 +38,7 @@ namespace FailureSimulator.Core.Graph
         public IReadOnlyList<Edge> Edges => _edges.AsReadOnly();
 
 
-        public GraphUnit(string name)
+        public Vertex(string name)
         {
             Name = name;
             Elements = new List<(Element Element, int Amount)>();
@@ -53,7 +53,7 @@ namespace FailureSimulator.Core.Graph
         /// <param name="length">Длина ребра</param>
         /// <param name="intentiy">Интенсивность отказов единицы длины ребра</param>
         /// <returns>Созданное ребро</returns>
-        public Edge AddEdge(GraphUnit other, double length=0, double intentiy=0)
+        public Edge AddEdge(Vertex other, double length=0, double intentiy=0)
         {
             var edge = new Edge(other, length, intentiy);
             _edges.Add(edge);
@@ -65,7 +65,7 @@ namespace FailureSimulator.Core.Graph
         /// Удаляет ребро, ведущее к заданной вершине
         /// </summary>
         /// <param name="other">Вершина, к которой идет ребро</param>
-        public void RemoveEdge(GraphUnit other)
+        public void RemoveEdge(Vertex other)
         {
             if (other == null)
                 throw new ArgumentNullException(nameof(other));
@@ -103,7 +103,7 @@ namespace FailureSimulator.Core.Graph
                 throw new ArgumentNullException(nameof(edge));
 
             if(!_edges.Contains(edge))
-                throw new ArgumentException($"Ребро {Name} - {edge.GraphUnit.Name} отсутствует в графе");
+                throw new ArgumentException($"Ребро {Name} - {edge.Vertex.Name} отсутствует в графе");
 
             _edges.Remove(edge);
         }
@@ -118,7 +118,7 @@ namespace FailureSimulator.Core.Graph
             if(otherName == null)
                 throw new ArgumentNullException(nameof(otherName));
 
-            return Edges.FirstOrDefault(x => x.GraphUnit.Name == otherName);
+            return Edges.FirstOrDefault(x => x.Vertex.Name == otherName);
         }
 
         /// <summary>
@@ -126,12 +126,12 @@ namespace FailureSimulator.Core.Graph
         /// </summary>
         /// <param name="otherName">Вершины, куда входит ребро</param>
         /// <returns>Ребро; null, если не найдено</returns>
-        public Edge GetEdge(GraphUnit otherGraphUnit)
+        public Edge GetEdge(Vertex otherVertex)
         {
-            if(otherGraphUnit == null)
-                throw new ArgumentNullException(nameof(otherGraphUnit));
+            if(otherVertex == null)
+                throw new ArgumentNullException(nameof(otherVertex));
 
-            return Edges.FirstOrDefault(x => x.GraphUnit == otherGraphUnit);
+            return Edges.FirstOrDefault(x => x.Vertex == otherVertex);
         }
 
         public override string ToString()

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using FailureSimulator.Core.AbstractPathAlgorithms;
 using FailureSimulator.Core.Graph;
-using FailureSimulator.Core.Probability;
 
 namespace FailureSimulator.Core.Simulator
 {
@@ -15,13 +14,13 @@ namespace FailureSimulator.Core.Simulator
     {
         private List<List<DestroyableElement>> _pathes;
         private Dictionary<IGraphUnit, DestroyableElement> _units;
-        private Random _rnd;
 
-        public ComputationGraph(Graph.Graph graph, IPathFinder pathFinder, GraphUnit startGraphUnit, GraphUnit endGraphUnit)
+        public IReadOnlyDictionary<IGraphUnit, DestroyableElement> Elements => _units;
+
+        public ComputationGraph(Graph.Graph graph, IPathFinder pathFinder, Vertex startVertex, Vertex endVertex)
         {
             _pathes = new List<List<DestroyableElement>>();
             _units = new Dictionary<IGraphUnit, DestroyableElement>();
-            _rnd = new Random();
 
 
             // Заполняем словарь элементами
@@ -33,7 +32,7 @@ namespace FailureSimulator.Core.Simulator
                     _units.Add(edge, new DestroyableElement(edge.FailIntensity, edge.RepairIntensity));
             }
 
-            var pathes = pathFinder.FindAllPathes(graph, startGraphUnit, endGraphUnit);                     
+            var pathes = pathFinder.FindAllPathes(graph, startVertex, endVertex);                     
 
             // На основе путей, составляем пути из DestroyableElements, так же добавляя
             // ребра между вершинами, потому что они тоже могут отказывать
@@ -59,25 +58,6 @@ namespace FailureSimulator.Core.Simulator
         }
 
 
-        /// <summary>
-        /// Генерирует, какой элемент отказал
-        /// </summary>
-        /// <returns></returns>
-        public DestroyableElement GetFailedElement()
-        {
-            double rand = _rnd.NextDouble() * GetTotalFailIntensity();
-            double sum = 0;
-
-            foreach (var destroyableElement in _units)
-            {
-                sum += destroyableElement.Value.FailIntensity;
-                if (sum > rand)
-                    return destroyableElement.Value;
-            }
-
-            return _units.Last().Value;
-        }
-
 
         /// <summary>
         /// Проверяет наличие пути между начальной  и конечной
@@ -102,21 +82,12 @@ namespace FailureSimulator.Core.Simulator
             return false;
         }
 
-
-        // Возвращает суммарную интенсивность отказов не отказавших
-        // элементов
-        private double GetTotalFailIntensity()
+        public void Reset()
         {
-            double sum = 0;
-
             foreach (var destroyableElement in _units)
-            {
-                if (!destroyableElement.Value.IsDestroyed)
-                    sum += destroyableElement.Value.FailIntensity;
-            }
-
-            return sum;
+                destroyableElement.Value.IsDestroyed = false;
         }
+        
     }
 
     /// <summary>
@@ -128,17 +99,17 @@ namespace FailureSimulator.Core.Simulator
         /// <summary>
         /// Интенсивность отказов
         /// </summary>
-        public double FailIntensity { get; protected set; }
+        public double FailIntensity { get; private set; }
        
         /// <summary>
         /// Интенсивность восстановления
         /// </summary>
-        public double RepairIntensity { get; protected set; }
+        public double RepairIntensity { get; private set; }
 
         /// <summary>
         /// В настоящий момент отказ
         /// </summary>
-        public bool IsDestroyed { get; protected set; }
+        public bool IsDestroyed { get; set; }
 
 
         /// <summary>
