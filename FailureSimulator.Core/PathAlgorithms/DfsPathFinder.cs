@@ -18,11 +18,11 @@ namespace FailureSimulator.Core.PathAlgorithms
         /// <param name="start">Начальная вершина</param>
         /// <param name="end">Конечная вершина</param>
         /// <returns>Список путей; путь - список вершин</returns>
-        public IReadOnlyList<IReadOnlyList<Vertex>> FindAllPathes(Graph.Graph graph, Vertex start, Vertex end)
+        public IReadOnlyList<IReadOnlyList<GraphUnit>> FindAllPathes(Graph.Graph graph, GraphUnit start, GraphUnit end)
         {
-            var isVisited = new Dictionary<Vertex, bool>();
-            var pathes = new LinkedList<List<Vertex>>();
-            var path = new LinkedList<Vertex>();
+            var isVisited = new Dictionary<GraphUnit, bool>();
+            var pathes = new LinkedList<List<GraphUnit>>();
+            var path = new LinkedList<GraphUnit>();
 
             foreach (var vertex in graph.Vertex)
                 isVisited.Add(vertex, false);
@@ -38,11 +38,11 @@ namespace FailureSimulator.Core.PathAlgorithms
         /// <param name="start">Имя начальной вершина</param>
         /// <param name="end">Имя конечной вершина</param>
         /// <returns>Список путей; путь - список вершин</returns>
-        public IReadOnlyList<IReadOnlyList<Vertex>> FindAllPathes(Graph.Graph graph, string start, string end)
+        public IReadOnlyList<IReadOnlyList<GraphUnit>> FindAllPathes(Graph.Graph graph, string start, string end)
         {
-            Vertex startVertex = graph.GetVertex(start);
-            Vertex endVertex = graph.GetVertex(end);
-            return FindAllPathes(graph, startVertex, endVertex);
+            GraphUnit startGraphUnit = graph.GetVertex(start);
+            GraphUnit endGraphUnit = graph.GetVertex(end);
+            return FindAllPathes(graph, startGraphUnit, endGraphUnit);
         }
 
         /* Поиск в глубину и составление пути
@@ -60,28 +60,28 @@ namespace FailureSimulator.Core.PathAlgorithms
          *  однократно посещается, но не вообще, а только в пределах текущего пути (т.е. в одном пути
          *  вершина встречается один раз, но может встречаться в нескольких
          */
-        void dfs(Vertex currentVertex,  (Dictionary<Vertex, bool> isVisted, LinkedList<List<Vertex>> pathes, LinkedList<Vertex> path, Vertex target) common)
+        void dfs(GraphUnit currentGraphUnit,  (Dictionary<GraphUnit, bool> isVisted, LinkedList<List<GraphUnit>> pathes, LinkedList<GraphUnit> path, GraphUnit target) common)
         {
-            common.isVisted[currentVertex] = true;
-            common.path.AddLast(currentVertex);
+            common.isVisted[currentGraphUnit] = true;
+            common.path.AddLast(currentGraphUnit);
 
-            if (currentVertex == common.target)
+            if (currentGraphUnit == common.target)
             {
                 common.pathes.AddLast(common.path.ToList());
                 common.path.RemoveLast();
-                common.isVisted[currentVertex] = false;
+                common.isVisted[currentGraphUnit] = false;
                 return;
             }
 
-            foreach (var edge in currentVertex.Edges)
+            foreach (var edge in currentGraphUnit.Edges)
             {
-                if (common.isVisted[edge.Vertex])
+                if (common.isVisted[edge.GraphUnit])
                     continue;
 
-                dfs(edge.Vertex, common);
+                dfs(edge.GraphUnit, common);
             }
 
-            common.isVisted[currentVertex] = false;
+            common.isVisted[currentGraphUnit] = false;
             common.path.RemoveLast();
         }
     }

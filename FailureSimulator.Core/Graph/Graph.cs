@@ -18,13 +18,13 @@ namespace FailureSimulator.Core.Graph
     /// </summary>
     public class Graph
     {
-        private List<Vertex> _vertex;
+        private List<GraphUnit> _vertex;
 
         /// <summary>
         /// Список вершин графа
         /// </summary>
-        //public Dictionary<string, Vertex> Vertex { get; private set; }
-        public IReadOnlyList<Vertex> Vertex => _vertex.AsReadOnly();
+        //public Dictionary<string, GraphUnit> GraphUnit { get; private set; }
+        public IReadOnlyList<GraphUnit> Vertex => _vertex.AsReadOnly();
 
         /// <summary>
         /// Список элементов, из которых состоят вершины (узлы)
@@ -33,7 +33,7 @@ namespace FailureSimulator.Core.Graph
 
         public Graph()
         {
-            _vertex = new List<Vertex>();
+            _vertex = new List<GraphUnit>();
             Elements = new List<Element>();
         }
 
@@ -43,21 +43,21 @@ namespace FailureSimulator.Core.Graph
         /// <summary>
         /// Добавляет новую вершину в граф
         /// </summary>
-        /// <param name="vertex">Вершина</param>
+        /// <param name="graphUnit">Вершина</param>
         /// <returns>Добавленную вершину</returns>
-        /// <exception cref="ArgumentNullException">vertex - NULL</exception>
+        /// <exception cref="ArgumentNullException">graphUnit - NULL</exception>
         /// <exception cref="ArgumentException">Граф уже содержит указанную вершину</exception>
-        public Vertex AddVertex(Vertex vertex)
+        public GraphUnit AddVertex(GraphUnit graphUnit)
         {
-            if (vertex == null)
-                throw new ArgumentNullException(nameof(vertex));
+            if (graphUnit == null)
+                throw new ArgumentNullException(nameof(graphUnit));
 
-            if (_getVertex(vertex.Name)!=null)
-                throw new ArgumentException($"Граф уже содержит вершину с именем {vertex.Name}");
+            if (_getVertex(graphUnit.Name)!=null)
+                throw new ArgumentException($"Граф уже содержит вершину с именем {graphUnit.Name}");
 
-            _vertex.Add(vertex);
+            _vertex.Add(graphUnit);
 
-            return vertex;
+            return graphUnit;
         }
 
 
@@ -82,38 +82,38 @@ namespace FailureSimulator.Core.Graph
         /// <summary>
         /// Добавляет новое ориентированное ребро между двумя вершинами в граф
         /// </summary>
-        /// <param name="vertexA">Вершина, из которой выходит ребро</param>
-        /// <param name="vertexB">Вершина, в которую входит ребро</param>
+        /// <param name="graphUnitA">Вершина, из которой выходит ребро</param>
+        /// <param name="graphUnitB">Вершина, в которую входит ребро</param>
         /// <param name="length">Длина ребра</param>
         /// <param name="intensity">Интенсивность отказов на единицу длины ребра</param>
         /// <returns>Созданное ребро</returns>
-        public Edge AddEdge(Vertex vertexA, Vertex vertexB, double length = 0, double intensity = 0)
+        public Edge AddEdge(GraphUnit graphUnitA, GraphUnit graphUnitB, double length = 0, double intensity = 0)
         {
-            AssertVertexExists(vertexA);
-            AssertVertexExists(vertexB);
+            AssertVertexExists(graphUnitA);
+            AssertVertexExists(graphUnitB);
 
-            return vertexA.AddEdge(vertexB, length, intensity);
+            return graphUnitA.AddEdge(graphUnitB, length, intensity);
         }
 
 
         /// <summary>
         /// Удаляет вершину из графа
         /// </summary>
-        /// <param name="vertex">Вершина</param>
-        /// <exception cref="ArgumentNullException">vertex - Null</exception>
+        /// <param name="graphUnit">Вершина</param>
+        /// <exception cref="ArgumentNullException">graphUnit - Null</exception>
         /// <exception cref="ArgumentException">Вершина отсутствует в графе</exception>
-        public void RemoveVertex(Vertex vertex)
+        public void RemoveVertex(GraphUnit graphUnit)
         {
-            if (vertex == null)
-                throw new ArgumentNullException(nameof(vertex));
+            if (graphUnit == null)
+                throw new ArgumentNullException(nameof(graphUnit));
 
-            if(!_vertex.Remove(vertex))
-                throw new ArgumentException($"Вершина {vertex.Name} отсутствует в графе");
+            if(!_vertex.Remove(graphUnit))
+                throw new ArgumentException($"Вершина {graphUnit.Name} отсутствует в графе");
 
             // Но еще надо пройтись по всем ребрам и удалить ребра, ведущие к этой вершине
             foreach (var vert in Vertex)
             {
-                var edge = vert.GetEdge(vertex);
+                var edge = vert.GetEdge(graphUnit);
                 if (edge != null)
                     vert.RemoveEdge(edge);
             }
@@ -165,16 +165,16 @@ namespace FailureSimulator.Core.Graph
         /// <summary>
         /// Удаляет ориентированное ребро между двумя вершинами из графа
         /// </summary>
-        /// <param name="vertexA">Вершина, из которой выходит ребро</param>
-        /// <param name="vertexB">Вершины, в которую входит ребро</param>
+        /// <param name="graphUnitA">Вершина, из которой выходит ребро</param>
+        /// <param name="graphUnitB">Вершины, в которую входит ребро</param>
         /// <exception cref="ArgumentNullException">Одна из указанных вершин - null</exception>
         /// <exception cref="ArgumentException">Одна из указанных вершин отсутствует в графе</exception> 
-        public void RemoveEdge(Vertex vertexA, Vertex vertexB)
+        public void RemoveEdge(GraphUnit graphUnitA, GraphUnit graphUnitB)
         {
-            AssertVertexExists(vertexA);
-            AssertVertexExists(vertexB);
+            AssertVertexExists(graphUnitA);
+            AssertVertexExists(graphUnitB);
 
-            vertexA.RemoveEdge(vertexB);
+            graphUnitA.RemoveEdge(graphUnitB);
         }
 
         #endregion
@@ -186,7 +186,7 @@ namespace FailureSimulator.Core.Graph
         /// <param name="vertexName">Имя вершины</param>
         /// <returns>Вершина</returns>
         /// <exception cref="ArgumentNullException">vertexName - null</exception>
-        public Vertex GetVertex(string vertexName)
+        public GraphUnit GetVertex(string vertexName)
         {
             if(vertexName == null)
                 throw new ArgumentNullException(nameof(vertexName));
@@ -198,20 +198,20 @@ namespace FailureSimulator.Core.Graph
         /// <summary>
         /// Определяет индекс вершины по вершине
         /// </summary>
-        /// <param name="vertex">Вершина</param>
+        /// <param name="graphUnit">Вершина</param>
         /// <returns>Индекс найденной вершины</returns>
-        /// <exception cref="ArgumentNullException">vertex - null</exception>
+        /// <exception cref="ArgumentNullException">graphUnit - null</exception>
         /// <exception cref="ArgumentException">Указанная вершина не найдена в графе</exception>
-        public int GetVertexIndex(Vertex vertex)
+        public int GetVertexIndex(GraphUnit graphUnit)
         {
-            if(vertex == null)
-                throw new ArgumentNullException(nameof(vertex));
+            if(graphUnit == null)
+                throw new ArgumentNullException(nameof(graphUnit));
 
             for(int i = 0; i < _vertex.Count; i++)
-                if (vertex == _vertex[i])
+                if (graphUnit == _vertex[i])
                     return i;
 
-            throw new ArgumentException($"Вершина {vertex.Name} отсутствует в графе");
+            throw new ArgumentException($"Вершина {graphUnit.Name} отсутствует в графе");
         }
 
 
@@ -220,7 +220,7 @@ namespace FailureSimulator.Core.Graph
         /// </summary>
         /// <param name="vertexName">Имя вершины</param>
         /// <returns>Индекс найденной вершины</returns>
-        /// <exception cref="ArgumentNullException">vertex - null</exception>
+        /// <exception cref="ArgumentNullException">graphUnit - null</exception>
         /// <exception cref="ArgumentException">Вершина с указанным именем отсутствует в графе</exception>
         public int GetVertexIndex(string vertexName)
         {
@@ -238,15 +238,15 @@ namespace FailureSimulator.Core.Graph
         /// <summary>
         /// Возвращает ребро между двумя вершинами, если оно существует
         /// </summary>
-        /// <param name="vertexA">Вершина, из которой выходит ребро</param>
-        /// <param name="vertexB">Вершина, в которую входит ребро</param>
+        /// <param name="graphUnitA">Вершина, из которой выходит ребро</param>
+        /// <param name="graphUnitB">Вершина, в которую входит ребро</param>
         /// <returns>Ребро, null, если ребра нет</returns>
-        public Edge GetEdge(Vertex vertexA, Vertex vertexB)
+        public Edge GetEdge(GraphUnit graphUnitA, GraphUnit graphUnitB)
         {
-            AssertVertexExists(vertexA);
-            AssertVertexExists(vertexB);
+            AssertVertexExists(graphUnitA);
+            AssertVertexExists(graphUnitB);
 
-            return vertexA.GetEdge(vertexB);
+            return graphUnitA.GetEdge(graphUnitB);
         }
 
         /// <summary>
@@ -266,7 +266,7 @@ namespace FailureSimulator.Core.Graph
         ///////////////////////////////////////////////////////////////////////////////////////////
 
 
-        private Vertex _getVertex(string vertexName)
+        private GraphUnit _getVertex(string vertexName)
         {
             return _vertex.FirstOrDefault(x => x.Name == vertexName);
         }
@@ -287,14 +287,14 @@ namespace FailureSimulator.Core.Graph
         /// <summary>
         /// Проверяет, что вершина не NULL и она содержится в графе
         /// </summary>
-        /// <param name="vertex"></param>
-        public void AssertVertexExists(Vertex vertex)
+        /// <param name="graphUnit"></param>
+        public void AssertVertexExists(GraphUnit graphUnit)
         {
-            if(vertex == null)
-                throw new ArgumentNullException(nameof(vertex));
+            if(graphUnit == null)
+                throw new ArgumentNullException(nameof(graphUnit));
 
-            if(!_vertex.Contains(vertex))
-                throw new ArgumentException($"Вершина {vertex.Name} отсутствует в графе");
+            if(!_vertex.Contains(graphUnit))
+                throw new ArgumentException($"Вершина {graphUnit.Name} отсутствует в графе");
         }
 
     }

@@ -20,7 +20,7 @@ namespace FailureSimulator.Tests
         public void AddVertex_ok()
         {
             var graph = new Graph();
-            var vertex = new Vertex("vertex1");
+            var vertex = new GraphUnit("vertex1");
             graph.AddVertex(vertex);
 
             Assert.AreSame(vertex, graph.Vertex[0]);
@@ -30,7 +30,7 @@ namespace FailureSimulator.Tests
         public void AddVertex_fail_refAlreadyExists()
         {
             var graph = new Graph();
-            var vertex = new Vertex("vertex1");
+            var vertex = new GraphUnit("vertex1");
             graph.AddVertex(vertex);
 
             Assert.ThrowsException<ArgumentException>(() => graph.AddVertex(vertex));
@@ -40,24 +40,24 @@ namespace FailureSimulator.Tests
         public void AddVertex_fail_nameAlreadyExists()
         {
             var graph = new Graph();
-            var vertex = new Vertex("vertex1");
+            var vertex = new GraphUnit("vertex1");
             graph.AddVertex(vertex);
 
-            Assert.ThrowsException<ArgumentException>(() => graph.AddVertex(new Vertex("vertex1")));
+            Assert.ThrowsException<ArgumentException>(() => graph.AddVertex(new GraphUnit("vertex1")));
         }
 
         [TestMethod]
         public void AddEdge_byVertexRef_ok()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
-            var vertex2 = new Vertex("vertex2");
+            var vertex1 = new GraphUnit("vertex1");
+            var vertex2 = new GraphUnit("vertex2");
             graph.AddVertex(vertex1);
             graph.AddVertex(vertex2);
 
             var edge1 = graph.AddEdge(vertex1, vertex2);
             Assert.AreSame(edge1, graph.Vertex[0].Edges[0]);
-            Assert.AreSame(vertex2, graph.Vertex[0].Edges[0].Vertex);
+            Assert.AreSame(vertex2, graph.Vertex[0].Edges[0].GraphUnit);
             Assert.AreEqual(1, graph.Vertex[0].Edges.Count);
         }
 
@@ -65,14 +65,14 @@ namespace FailureSimulator.Tests
         public void AddEdge_byVertexRef_ok_sameNameDifferentRefs()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
-            var vertex2 = new Vertex("vertex2");
+            var vertex1 = new GraphUnit("vertex1");
+            var vertex2 = new GraphUnit("vertex2");
             graph.AddVertex(vertex1);
-            graph.AddVertex(new Vertex("vertex2"));
+            graph.AddVertex(new GraphUnit("vertex2"));
 
             var edge1 = graph.AddEdge(vertex1, vertex2);
             Assert.AreSame(edge1, graph.Vertex[0].Edges[0]);
-            Assert.AreSame(vertex2, graph.Vertex[0].Edges[0].Vertex);
+            Assert.AreSame(vertex2, graph.Vertex[0].Edges[0].GraphUnit);
             Assert.AreEqual(1, graph.Vertex[0].Edges.Count);
         }
 
@@ -80,14 +80,14 @@ namespace FailureSimulator.Tests
         public void AddEdge_byVertexRef_fail_vertexNull()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
-            var vertex2 = new Vertex("vertex2");
+            var vertex1 = new GraphUnit("vertex1");
+            var vertex2 = new GraphUnit("vertex2");
             graph.AddVertex(vertex1);
             graph.AddVertex(vertex2);
 
-            Assert.ThrowsException<ArgumentNullException>(() => graph.AddEdge(null as Vertex, vertex2));
-            Assert.ThrowsException<ArgumentNullException>(() => graph.AddEdge(vertex1, null as Vertex));
-            Assert.ThrowsException<ArgumentNullException>(() => graph.AddEdge(null as Vertex, null as Vertex));
+            Assert.ThrowsException<ArgumentNullException>(() => graph.AddEdge(null as GraphUnit, vertex2));
+            Assert.ThrowsException<ArgumentNullException>(() => graph.AddEdge(vertex1, null as GraphUnit));
+            Assert.ThrowsException<ArgumentNullException>(() => graph.AddEdge(null as GraphUnit, null as GraphUnit));
         }
 
 
@@ -95,9 +95,9 @@ namespace FailureSimulator.Tests
         public void AddEdge_byVertexRef_fail_noVertex()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
-            var vertex2 = new Vertex("vertex2");
-            var vertex3  = new Vertex("vertex3");
+            var vertex1 = new GraphUnit("vertex1");
+            var vertex2 = new GraphUnit("vertex2");
+            var vertex3  = new GraphUnit("vertex3");
             graph.AddVertex(vertex1);
             graph.AddVertex(vertex2);
 
@@ -110,14 +110,14 @@ namespace FailureSimulator.Tests
         public void AddEdge_byVertexName_ok()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
-            var vertex2 = new Vertex("vertex2");
+            var vertex1 = new GraphUnit("vertex1");
+            var vertex2 = new GraphUnit("vertex2");
             graph.AddVertex(vertex1);
             graph.AddVertex(vertex2);
 
             var edge1 = graph.AddEdge("vertex1", "vertex2");
             Assert.AreSame(edge1, graph.Vertex[0].Edges[0]);
-            Assert.AreSame(vertex2, graph.Vertex[0].Edges[0].Vertex);
+            Assert.AreSame(vertex2, graph.Vertex[0].Edges[0].GraphUnit);
             Assert.AreEqual(1, graph.Vertex[0].Edges.Count);
         }
 
@@ -125,8 +125,8 @@ namespace FailureSimulator.Tests
         public void AddEdge_byVertexName_fail_vertexNameNull()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
-            var vertex2 = new Vertex("vertex2");
+            var vertex1 = new GraphUnit("vertex1");
+            var vertex2 = new GraphUnit("vertex2");
             graph.AddVertex(vertex1);
             graph.AddVertex(vertex2);
 
@@ -139,8 +139,8 @@ namespace FailureSimulator.Tests
         public void AddEdge_byVertexName_fail_noVertex()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
-            var vertex2 = new Vertex("vertex2");
+            var vertex1 = new GraphUnit("vertex1");
+            var vertex2 = new GraphUnit("vertex2");
             graph.AddVertex(vertex1);
             graph.AddVertex(vertex2);
 
@@ -153,7 +153,7 @@ namespace FailureSimulator.Tests
         public void RemoveVertex_byVertexRef_ok_noEdge()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
+            var vertex1 = new GraphUnit("vertex1");
             graph.AddVertex(vertex1);
 
             graph.RemoveVertex(vertex1);
@@ -164,8 +164,8 @@ namespace FailureSimulator.Tests
         public void RemoveVertex_byVertexRef_ok_removeEdge()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
-            var vertex2 = new Vertex("vertex2");
+            var vertex1 = new GraphUnit("vertex1");
+            var vertex2 = new GraphUnit("vertex2");
             graph.AddVertex(vertex1);
             graph.AddVertex(vertex2);
             graph.AddEdge(vertex2, vertex1);
@@ -180,9 +180,9 @@ namespace FailureSimulator.Tests
         public void RemoveVertex_byVertexRef_ok_removeMultipleEdges()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
-            var vertex2 = new Vertex("vertex2");
-            var vertex3 = new Vertex("vertex3");
+            var vertex1 = new GraphUnit("vertex1");
+            var vertex2 = new GraphUnit("vertex2");
+            var vertex3 = new GraphUnit("vertex3");
             graph.AddVertex(vertex1);
             graph.AddVertex(vertex2);
             graph.AddVertex(vertex3);
@@ -199,9 +199,9 @@ namespace FailureSimulator.Tests
         public void RemoveVertex_byVertexRef_ok_keepOtherEdges()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
-            var vertex2 = new Vertex("vertex2");
-            var vertex3 = new Vertex("vertex3");
+            var vertex1 = new GraphUnit("vertex1");
+            var vertex2 = new GraphUnit("vertex2");
+            var vertex3 = new GraphUnit("vertex3");
             graph.AddVertex(vertex1);
             graph.AddVertex(vertex2);
             graph.AddVertex(vertex3);
@@ -219,13 +219,13 @@ namespace FailureSimulator.Tests
         public void RemoveVertex_byVertexRef_ok_sameNameDifferentRefs()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
-            var vertex2 = new Vertex("vertex2");
+            var vertex1 = new GraphUnit("vertex1");
+            var vertex2 = new GraphUnit("vertex2");
             graph.AddVertex(vertex1);
             graph.AddVertex(vertex2);
             graph.AddEdge(vertex2, vertex1);
 
-            graph.RemoveVertex(new Vertex("vertex2"));
+            graph.RemoveVertex(new GraphUnit("vertex2"));
             Assert.AreEqual(1, graph.Vertex.Count);
             Assert.AreSame(vertex2, graph.Vertex[0]);
             Assert.AreEqual(0, graph.Vertex[0].Edges.Count); // Ребра 2-1 нет
@@ -235,26 +235,26 @@ namespace FailureSimulator.Tests
         public void RemoveVertex_byVertexRef_fail_vertexNull()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
-            var vertex2 = new Vertex("vertex2");
+            var vertex1 = new GraphUnit("vertex1");
+            var vertex2 = new GraphUnit("vertex2");
             graph.AddVertex(vertex1);
             graph.AddVertex(vertex2);
             graph.AddEdge(vertex2, vertex1);
 
-            Assert.ThrowsException<ArgumentNullException>(() => graph.RemoveVertex(null as Vertex));
+            Assert.ThrowsException<ArgumentNullException>(() => graph.RemoveVertex(null as GraphUnit));
         }
 
         [TestMethod]
         public void RemoveVertex_byVertexRef_fail_noVertex()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
-            var vertex2 = new Vertex("vertex2");
+            var vertex1 = new GraphUnit("vertex1");
+            var vertex2 = new GraphUnit("vertex2");
             graph.AddVertex(vertex1);
             graph.AddVertex(vertex2);
             graph.AddEdge(vertex2, vertex1);
             
-            Assert.ThrowsException<ArgumentException>(() => graph.RemoveVertex(new Vertex("vertex3")));
+            Assert.ThrowsException<ArgumentException>(() => graph.RemoveVertex(new GraphUnit("vertex3")));
         }
 
         //TODO: Тест удаление по строкам
@@ -265,7 +265,7 @@ namespace FailureSimulator.Tests
         public void GetVertexByName_ok()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
+            var vertex1 = new GraphUnit("vertex1");
             graph.AddVertex(vertex1);
 
             var vertex2 = graph.GetVertex("vertex1");
@@ -276,7 +276,7 @@ namespace FailureSimulator.Tests
         public void GetVertexByName_fail_noVertex()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
+            var vertex1 = new GraphUnit("vertex1");
             graph.AddVertex(vertex1);
 
             var vertex2 = graph.GetVertex("vertex2");
@@ -288,7 +288,7 @@ namespace FailureSimulator.Tests
         public void GetVertexIndex_byVertexRef_ok()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
+            var vertex1 = new GraphUnit("vertex1");
             graph.AddVertex(vertex1);
 
             Assert.AreEqual(0, graph.GetVertexIndex(vertex1));
@@ -298,37 +298,37 @@ namespace FailureSimulator.Tests
         public void GetVertexIndex_byVertexRef_ok_sameNameDifferentRefs()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
+            var vertex1 = new GraphUnit("vertex1");
             graph.AddVertex(vertex1);
 
-            Assert.AreEqual(0, graph.GetVertexIndex(new Vertex("vertex1")));
+            Assert.AreEqual(0, graph.GetVertexIndex(new GraphUnit("vertex1")));
         }
 
         [TestMethod]
         public void GetVertexIndex_byVertexRef_fail_vertexNull()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
+            var vertex1 = new GraphUnit("vertex1");
             graph.AddVertex(vertex1);
 
-            Assert.ThrowsException<ArgumentNullException>(() => graph.GetVertexIndex(null as Vertex));
+            Assert.ThrowsException<ArgumentNullException>(() => graph.GetVertexIndex(null as GraphUnit));
         }
 
         [TestMethod]
         public void GetVertexIndex_byVertexRef_fail_noVertex()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
+            var vertex1 = new GraphUnit("vertex1");
             graph.AddVertex(vertex1);
 
-            Assert.ThrowsException<ArgumentException>(() => graph.GetVertexIndex(new Vertex("vertex2")));
+            Assert.ThrowsException<ArgumentException>(() => graph.GetVertexIndex(new GraphUnit("vertex2")));
         }
         
         [TestMethod]
         public void GetVertexIndex_byVertexName_ok()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
+            var vertex1 = new GraphUnit("vertex1");
             graph.AddVertex(vertex1);
 
             Assert.AreEqual(0, graph.GetVertexIndex("vertex1"));
@@ -338,7 +338,7 @@ namespace FailureSimulator.Tests
         public void GetVertexIndex_byVertexName_fail_vertexNameNull()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
+            var vertex1 = new GraphUnit("vertex1");
             graph.AddVertex(vertex1);
 
             Assert.ThrowsException<ArgumentNullException>(() => graph.GetVertexIndex(null as string));
@@ -348,7 +348,7 @@ namespace FailureSimulator.Tests
         public void GetVertexIndex_byVertexName_fail_noVertex()
         {
             var graph = new Graph();
-            var vertex1 = new Vertex("vertex1");
+            var vertex1 = new GraphUnit("vertex1");
             graph.AddVertex(vertex1);
 
             Assert.ThrowsException<ArgumentException>(() => graph.GetVertexIndex("vertex2"));

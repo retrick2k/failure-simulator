@@ -48,7 +48,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComputationGraphTests.cs" />
     <Compile Include="DfsTests.cs" />
     <Compile Include="EdgeTests.cs" />
     <Compile Include="GrpahTests.cs" />
