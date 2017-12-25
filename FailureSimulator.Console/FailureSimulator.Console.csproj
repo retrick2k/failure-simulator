@@ -52,5 +52,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FailureSimulator.Core\FailureSimulator.Core.csproj">
+      <Project>{38E8C441-2673-4CEB-AB76-508462BCA9E8}</Project>
+      <Name>FailureSimulator.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -123,7 +123,7 @@ namespace FailureSimulator.Core.Simulator
         /// <returns></returns>
         private Point[] ToHistogram(List<double> data, int numBars, double? min = null, double? max = null)
         {
-            var hist = new Point[numBars];
+            var hist = new Point[numBars+1];
 
             // Вычисляем ширину интервала
             double _min = min ?? data.Min();
@@ -131,8 +131,10 @@ namespace FailureSimulator.Core.Simulator
             double intervalPerBar = (_max - _min) / numBars;
 
             // Заполняем в качестве x-меток середины интервалов
-            for (int i = 0; i < numBars; i++)
-                hist[i].X = (i * intervalPerBar) + _min;
+            for (int i = 0; i < numBars + 1; i++)
+            {
+                hist[i] = new Point {X = (i * intervalPerBar) + _min};
+            }
 
             // Подсчитываем частоты
             foreach (var d in data)
