@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FailureSimulator.Core.Graph;
 
-namespace FailureSimulator.Core.Simulator
+namespace FailureSimulator.Core.Simulator.Report
 {
     /// <summary>
     /// Отчет симуляции
@@ -38,10 +38,23 @@ namespace FailureSimulator.Core.Simulator
         /// </summary>
         public IReadOnlyList<IReadOnlyList<Vertex>> Pathes { get; set; }
         
-        // Вероятность безотказной работы системы
-        // Гррафик зависимости безотказной работы системы от времени Pc(t)
-        // Гистограмма времен отказа сети связи
-        // Гистограмма времен восстановления
-        // Диаграмма восстановления
+
+        // TODO: Вероятность безотказной работы системы
+        // TODO: Гррафик зависимости безотказной работы системы от времени Pc(t)
+
+        /// <summary>
+        /// Гистограмма отказов
+        /// </summary>
+        public Point[] FailureBarChart { get; set; }
+
+        /// <summary>
+        /// Гистограмма восстановления
+        /// </summary>
+        public Point[] RepairBarChart { get; set; }
+
+        /// <summary>
+        /// Диаграмма восстановления
+        /// </summary>
+        public TimeDiagram TimeDiagram { get; set; }
     }
 }

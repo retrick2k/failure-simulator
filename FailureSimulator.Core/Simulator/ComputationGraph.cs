@@ -14,8 +14,10 @@ namespace FailureSimulator.Core.Simulator
     {
         private List<List<DestroyableElement>> _pathes;
         private Dictionary<IGraphUnit, DestroyableElement> _units;
+        
 
         public IReadOnlyDictionary<IGraphUnit, DestroyableElement> Elements => _units;
+        public IReadOnlyList<IReadOnlyList<Vertex>> Pathes { get; private set; }
 
         public ComputationGraph(Graph.Graph graph, IPathFinder pathFinder, Vertex startVertex, Vertex endVertex)
         {
@@ -32,11 +34,11 @@ namespace FailureSimulator.Core.Simulator
                     _units.Add(edge, new DestroyableElement(edge.FailIntensity, edge.RepairIntensity));
             }
 
-            var pathes = pathFinder.FindAllPathes(graph, startVertex, endVertex);                     
+            Pathes = pathFinder.FindAllPathes(graph, startVertex, endVertex);                     
 
             // На основе путей, составляем пути из DestroyableElements, так же добавляя
             // ребра между вершинами, потому что они тоже могут отказывать
-            foreach (var path in pathes)
+            foreach (var path in Pathes)
             {
                 var dPath = new List<DestroyableElement>();
 
