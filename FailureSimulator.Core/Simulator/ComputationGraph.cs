@@ -28,10 +28,10 @@ namespace FailureSimulator.Core.Simulator
             // Заполняем словарь элементами
             foreach (var vertex in graph.Vertex)
             {
-                _units.Add(vertex, new DestroyableElement(vertex.FailIntensity, vertex.RepairIntensity));
+                _units.Add(vertex, new DestroyableElement(vertex));
 
                 foreach (var edge in vertex.Edges)
-                    _units.Add(edge, new DestroyableElement(edge.FailIntensity, edge.RepairIntensity));
+                    _units.Add(edge, new DestroyableElement(edge));
             }
 
             Pathes = pathFinder.FindAllPathes(graph, startVertex, endVertex);                     
@@ -117,21 +117,21 @@ namespace FailureSimulator.Core.Simulator
         /// <summary>
         /// Оригинальный элемент, на основе которого был сделан DestroyableElement
         /// </summary>
-        //public IGraphUnit Data { get; set; }
+        public IGraphUnit Data { get; set; }
 
-        /*public DestroyableElement(IGraphUnit unit)
+        public DestroyableElement(IGraphUnit unit)
         {
-            //Data = unit;
+            Data = unit;
 
             FailIntensity = unit.FailIntensity;
             RepairIntensity = unit.RepairIntensity;
-        }*/
+        }
 
-        public DestroyableElement(double failIntensity, double repairIntensity)
+        /*public DestroyableElement(double failIntensity, double repairIntensity)
         {
             FailIntensity = failIntensity;
             RepairIntensity = repairIntensity;
-        }
+        }*/
     }   
 
 }

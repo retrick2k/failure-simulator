@@ -18,13 +18,19 @@ namespace FailureSimulator.Console
             var graph = new Graph();
             var v1  = graph.AddVertex(new Vertex("v1"));
             var v2 = graph.AddVertex(new Vertex("v2"));
+            graph.AddVertex(new Vertex("v3"));
+            graph.AddVertex(new Vertex("v4"));
 
-            graph.Vertex[0].Elements.Add((e1, 1));
-            graph.Vertex[1].Elements.Add((e1, 1));           
+            //graph.Vertex[0].Elements.Add((e1, 1));
+            //graph.Vertex[1].Elements.Add((e1, 1));
+            graph.Vertex[2].Elements.Add((e1, 1));
+            graph.Vertex[3].Elements.Add((e1, 1));
 
-            graph.AddEdge("v1", "v2", 1, 0.001);
-
-
+            graph.AddEdge("v1", "v3", 1, 0.00);
+            graph.AddEdge("v1", "v4", 1, 0.00);
+            graph.AddEdge("v3", "v2", 1, 0.00);
+            graph.AddEdge("v4", "v2", 1, 0.00);
+            
             var sim = new Simulator(graph, new DfsPathFinder(), SimulationSettings.Default);
             var report = sim.Simulate(v1, v2);
 

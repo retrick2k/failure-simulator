@@ -45,7 +45,7 @@ namespace FailureSimulator.Core.Simulator
             // TODO: Гррафик зависимости безотказной работы системы от времени Pc(t)
             report.FailureBarChart = ToHistogram(failureTimes, _settings.BarChartCount, report.MinFailureTime, report.MaxFailureTime);
             // TODO: RepairBarChart
-            // TODO: TimeDiagram
+            // TODO: TimeDiagra
 
 
             return report;
@@ -64,6 +64,8 @@ namespace FailureSimulator.Core.Simulator
                 double tFail = GetFailureTime(element);
                 t += tFail;
                 element.IsDestroyed = true;
+
+                Console.WriteLine($"Failed: {element.Data.Name}, time: {t}");
             }
             while (cGraph.IsPathExists());
 
@@ -139,7 +141,12 @@ namespace FailureSimulator.Core.Simulator
             // Подсчитываем частоты
             foreach (var d in data)
             {
-                int index = (int)((d - _min) / intervalPerBar);
+                int index = 0;
+                if (Math.Abs(intervalPerBar) > 0.001)
+                    index = (int) ((d - _min) / intervalPerBar);
+                else
+                    index = 0;
+
                 hist[index].Y++;
             }
 

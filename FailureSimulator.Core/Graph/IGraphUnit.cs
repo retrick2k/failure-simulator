@@ -2,6 +2,8 @@
 {
     public interface IGraphUnit
     {
+        string Name { get; }
+
         /// <summary>
         /// Интенсивность отказов
         /// </summary>

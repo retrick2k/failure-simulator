@@ -8,7 +8,7 @@
         /// <summary>
         /// Количество запусков моделирования
         /// </summary>
-        public int NumRuns { get; set; } = 1000; //TODO: 1000
+        public int NumRuns { get; set; } = 1; //TODO: 1000
 
         /// <summary>
         /// Количество столбцов на гистограммах

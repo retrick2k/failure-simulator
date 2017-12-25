@@ -15,6 +15,8 @@
         /// </summary>
         public double SpecificFailIntensity { get; set; }
 
+        public string Name => $"-> {Vertex.Name}";
+
         /// <summary>
         /// Интенсивность отказов всей связи
         /// </summary>
