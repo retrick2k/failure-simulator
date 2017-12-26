@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractPathAlgorithms\IPathFinder.cs" />
+    <Compile Include="Data\MinHeap.cs" />
     <Compile Include="Graph\Edge.cs" />
     <Compile Include="Graph\Element.cs" />
     <Compile Include="Graph\Graph.cs" />
