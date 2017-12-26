@@ -21,8 +21,6 @@ namespace FailureSimulator.Console
             graph.AddVertex(new Vertex("v3"));
             graph.AddVertex(new Vertex("v4"));
 
-            //graph.Vertex[0].Elements.Add((e1, 1));
-            //graph.Vertex[1].Elements.Add((e1, 1));
             graph.Vertex[2].Elements.Add((e1, 1));
             graph.Vertex[3].Elements.Add((e1, 1));
 

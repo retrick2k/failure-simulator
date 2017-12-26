@@ -67,7 +67,7 @@ namespace FailureSimulator.Core.Simulator
 
                 Console.WriteLine($"Failed: {element.Data.Name}, time: {t}");
             }
-            while (cGraph.IsPathExists());
+            while (cGraph.IsPathExists() && t < _settings.MaxTime);
 
             return t;
         }
@@ -84,6 +84,9 @@ namespace FailureSimulator.Core.Simulator
 
             foreach (var destroyableElement in graph.Elements)
             {
+                if(destroyableElement.Value.IsDestroyed)
+                    continue;
+                
                 sum += destroyableElement.Value.FailIntensity;
                 if (sum > rand)
                     return destroyableElement.Value;

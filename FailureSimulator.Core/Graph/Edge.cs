@@ -40,7 +40,7 @@
             SpecificFailIntensity = intensiy;
         }
 
-        public override string ToString() => $"{Vertex.Name} ({Length})";
+        public override string ToString() => $"-> {Vertex.Name}";
 
     }
 }

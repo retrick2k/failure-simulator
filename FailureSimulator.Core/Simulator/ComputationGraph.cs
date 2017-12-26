@@ -127,6 +127,11 @@ namespace FailureSimulator.Core.Simulator
             RepairIntensity = unit.RepairIntensity;
         }
 
+        public override string ToString()
+        {
+            return $"{Data.ToString()}, Failed: {IsDestroyed}";
+        }
+
         /*public DestroyableElement(double failIntensity, double repairIntensity)
         {
             FailIntensity = failIntensity;
