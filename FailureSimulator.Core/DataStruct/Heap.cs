@@ -2,54 +2,54 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FailureSimulator.Core.Data
+namespace FailureSimulator.Core.DataStruct
 {
     /// <summary>
     /// Двоичная куча
     /// </summary>
     /// <typeparam name="T">Тип данных, хранящийся в куче</typeparam>
     /// <typeparam name="C">Тип компаратора приоритета</typeparam>
-    public class Heap<T, C> where T : IComparable where C : IHeapPriorityComparer<T>, new()
+    public class Heap<T> where T : IComparable<T>
     {
         // 0 - корень
         // Вершина i:
         //   2*i+1 - левый потомок
         //   2*i+2 - правый потомок
         private List<T> _elements;
-        private C _comparer;
+        private IHeapPriorityComparer<T> _comparer;
 
 
         /// <summary>
         /// Создает кучу
         /// </summary>
-        public Heap()
+        public Heap(IHeapPriorityComparer<T> comparer)
         {
             _elements = new List<T>();
-            _comparer = new C();
+            _comparer = comparer;
         }
 
         /// <summary>
         /// Создает кучу заданного начального размераы
         /// </summary>
         /// <param name="capacity"></param>
-        public Heap(int capacity)
+        public Heap(IHeapPriorityComparer<T> comparer, int capacity)
         {
             _elements = new List<T>(capacity);
-            _comparer = new C();
+            _comparer = comparer;
         }
 
         /// <summary>
         /// Создает кучу на основе данных
         /// </summary>
         /// <param name="elements"></param>
-        public Heap(IEnumerable<T> elements)
+        public Heap(IHeapPriorityComparer<T> comparer, IEnumerable<T> elements)
         {
             /* 1. Просто кладем произвольно в кучу
              * 2. Вызываем Heapefi для всех вершин с хотя бы одним потомком
              * 3. Потомок есть у первых heap_size/2
              */
 
-            _comparer = new C();
+            _comparer = comparer;
             _elements = elements.ToList();
             for(int i = _elements.Count / 2; i>=0; i--)
                 Heapify(i);
@@ -76,7 +76,7 @@ namespace FailureSimulator.Core.Data
         /// Возвращает максимальный (согласно заданному критерию)
         /// элемент       
         /// </summary>
-        public T Top
+        public T First
         {
             get
             {
@@ -96,37 +96,24 @@ namespace FailureSimulator.Core.Data
         /// Удаляет максимальный (согласно заданному критерию)
         /// элемент
         /// </summary>
-        public void RemoteTop()
+        public T Pop()
         {
+
             if (_elements.Count == 0)
                 throw new IndexOutOfRangeException("Heap is empty");
+
+            var top = _elements[0];
 
             _elements[0] = _elements[_elements.Count - 1];
             _elements.RemoveAt(_elements.Count-1);
             Heapify(0);
+
+            return top;
         }
 
         // Восстанавливает кучу
         private void Heapify(int index)
         {
-            /*int leftIndex = index * 2 + 1;
-            int rightIndex = index * 2 - 1;
-            int swapIndex;
-
-            // Нужно ли вообще менять вершины
-            if(_comparer.IsHeaped(_elements[index], _elements[leftIndex]))
-                return;
-
-            // Определяем потомка с наибольшим приоритетом, с ним и будем менять
-            if (_comparer.IsHeaped(_elements[leftIndex], _elements[rightIndex]))
-                swapIndex = leftIndex;
-            else
-                swapIndex = rightIndex;
-
-
-            Swap(index, swapIndex);
-            Heapify(swapIndex);*/
-
             while (true)
             {
                 int leftChild = 2 * index + 1;
@@ -172,12 +159,13 @@ namespace FailureSimulator.Core.Data
         bool IsHeaped(T parent, T child);
     }
 
-    public class MinPriorityComparer<T> : IHeapPriorityComparer<T> where T: IComparable
+    public class MinPriorityComparer<T> : IHeapPriorityComparer<T> where T: IComparable<T>
     {
         public bool IsHeaped(T parent, T child)
         {
             return parent.CompareTo(child) < 0;
         }
+        
     }
 
 }

@@ -20,24 +20,26 @@ namespace FauilureSimulator.GuiTest
         {
             InitializeComponent();
 
-            var e1 = new Element("e1", 0.001);
+            var e1 = new Element("e1", 0.01);
 
             var graph = new Graph();
-            var v1 = graph.AddVertex(new Vertex("v1"));
-            var v2 = graph.AddVertex(new Vertex("v2"));
+            var start = graph.AddVertex(new Vertex("v1"));
+            graph.AddVertex(new Vertex("v2"));
             graph.AddVertex(new Vertex("v3"));
-            graph.AddVertex(new Vertex("v4"));
+            var end = graph.AddVertex(new Vertex("v4"));
 
-            graph.Vertex[2].Elements.Add((e1, 1));
-            graph.Vertex[3].Elements.Add((e1, 1));
 
-            graph.AddEdge("v1", "v3", 1, 0.00);
-            graph.AddEdge("v1", "v4", 1, 0.00);
-            graph.AddEdge("v3", "v2", 1, 0.00);
-            graph.AddEdge("v4", "v2", 1, 0.00);
+            graph.AddEdge("v1", "v2", 1, 0.5);
+            graph.AddEdge("v2", "v4", 1, 0.5);
 
+            graph.AddEdge("v1", "v3", 1, 0.5);
+            graph.AddEdge("v3", "v4", 1, 0.5);
+
+            for(int i = 0; i<10; i++)
+                graph.AddEdge("v1", "v4", 1, 0.005);
+            
             var sim = new Simulator(graph, new DfsPathFinder(), SimulationSettings.Default);
-            var report = sim.Simulate(v1, v2);
+            var report = sim.Simulate(start, end);
 
             PrintValue("Min fail time", report.MinFailureTime);
             PrintValue("Max fail time", report.MaxFailureTime);
@@ -64,6 +66,8 @@ namespace FauilureSimulator.GuiTest
             }
 
             var pane = zedGraphControl1.GraphPane;
+            pane.BarSettings.MinClusterGap = 0;
+            pane.BarSettings.MinBarGap = 0;
             pane.AddBar("WTF", points, Color.Green);
 
             zedGraphControl1.AxisChange();
