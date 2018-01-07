@@ -51,6 +51,7 @@
     <Compile Include="DfsTests.cs" />
     <Compile Include="EdgeTests.cs" />
     <Compile Include="GrpahTests.cs" />
+    <Compile Include="HeapTest.cs" />
     <Compile Include="VertexTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

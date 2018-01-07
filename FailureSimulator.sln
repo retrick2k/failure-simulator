@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FailureSimulator.Console", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FailureSimulator.Tests", "FailureSimulator.Tests\FailureSimulator.Tests.csproj", "{43E3C873-83D2-44AE-93F0-2A7D31072FF5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FauilureSimulator.GuiTest", "FauilureSimulator.GuiTest\FauilureSimulator.GuiTest.csproj", "{BF6FCAFE-D8EE-47FF-949D-F2C45322A4C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{43E3C873-83D2-44AE-93F0-2A7D31072FF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43E3C873-83D2-44AE-93F0-2A7D31072FF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43E3C873-83D2-44AE-93F0-2A7D31072FF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF6FCAFE-D8EE-47FF-949D-F2C45322A4C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF6FCAFE-D8EE-47FF-949D-F2C45322A4C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF6FCAFE-D8EE-47FF-949D-F2C45322A4C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF6FCAFE-D8EE-47FF-949D-F2C45322A4C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
