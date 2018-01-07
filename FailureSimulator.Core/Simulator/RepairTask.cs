@@ -1,4 +1,6 @@
-﻿namespace FailureSimulator.Core.Simulator
+﻿using System;
+
+namespace FailureSimulator.Core.Simulator
 {
     /// <summary>
     /// Задача на восстановление

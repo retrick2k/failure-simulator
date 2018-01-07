@@ -9,7 +9,7 @@ namespace FailureSimulator.Core.DataStruct
     /// </summary>
     /// <typeparam name="T">Тип данных, хранящийся в куче</typeparam>
     /// <typeparam name="C">Тип компаратора приоритета</typeparam>
-    public class Heap<T> where T : IComparable<T>
+    public class Heap<T>
     {
         // 0 - корень
         // Вершина i:
@@ -51,7 +51,7 @@ namespace FailureSimulator.Core.DataStruct
 
             _comparer = comparer;
             _elements = elements.ToList();
-            for(int i = _elements.Count / 2; i>=0; i--)
+            for (int i = _elements.Count / 2; i >= 0; i--)
                 Heapify(i);
         }
 
@@ -76,15 +76,14 @@ namespace FailureSimulator.Core.DataStruct
         /// Возвращает максимальный (согласно заданному критерию)
         /// элемент       
         /// </summary>
-        public T First
+        public T Peek()
         {
-            get
-            {
-                if (_elements.Count == 0)
-                    throw new IndexOutOfRangeException("Heap is empty");
 
-                return _elements[0];
-            }
+            if (_elements.Count == 0)
+                throw new IndexOutOfRangeException("Heap is empty");
+
+            return _elements[0];
+
         }
 
         /// <summary>
@@ -105,7 +104,7 @@ namespace FailureSimulator.Core.DataStruct
             var top = _elements[0];
 
             _elements[0] = _elements[_elements.Count - 1];
-            _elements.RemoveAt(_elements.Count-1);
+            _elements.RemoveAt(_elements.Count - 1);
             Heapify(0);
 
             return top;
@@ -122,13 +121,13 @@ namespace FailureSimulator.Core.DataStruct
 
                 if (leftChild < _elements.Count && _comparer.IsHeaped(_elements[leftChild], _elements[largestChild]))
                     largestChild = leftChild;
-                
 
-                if (rightChild < _elements.Count && _comparer.IsHeaped(_elements[rightChild], _elements[largestChild]))                
-                    largestChild = rightChild;                
 
-                if (largestChild == index)                
-                    break;                                
+                if (rightChild < _elements.Count && _comparer.IsHeaped(_elements[rightChild], _elements[largestChild]))
+                    largestChild = rightChild;
+
+                if (largestChild == index)
+                    break;
 
                 Swap(index, largestChild);
                 index = largestChild;
@@ -159,13 +158,13 @@ namespace FailureSimulator.Core.DataStruct
         bool IsHeaped(T parent, T child);
     }
 
-    public class MinPriorityComparer<T> : IHeapPriorityComparer<T> where T: IComparable<T>
+    public class MinPriorityComparer<T> : IHeapPriorityComparer<T> where T : IComparable<T>
     {
         public bool IsHeaped(T parent, T child)
         {
             return parent.CompareTo(child) < 0;
         }
-        
+
     }
 
 }

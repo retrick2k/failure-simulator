@@ -4,7 +4,7 @@ using FailureSimulator.Core.Simulator;
 namespace FailureSimulator.Core.RepairPolicy.Queues
 {
     /// <summary>
-    /// Чинить элементы в порядке отказов
+    /// Очередь, организующая ремонт в порядке отказов
     /// </summary>
     public class FifoRepairQueue : IRepairQueue
     {

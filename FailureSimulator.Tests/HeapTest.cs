@@ -15,7 +15,7 @@ namespace FailureSimulator.Tests
             heap.Add(2);
             heap.Add(1);
 
-            Assert.AreEqual(1, heap.First);
+            Assert.AreEqual(1, heap.Peek());
         }
 
         [TestMethod]
@@ -24,7 +24,7 @@ namespace FailureSimulator.Tests
             int[] array = new int[]{4, 1, 3, 0, 5};
             var heap = new Heap<int>(new MinPriorityComparer<int>());
 
-            Assert.AreEqual(0, heap.First);
+            Assert.AreEqual(0, heap.Peek());
         }
 
         [TestMethod]
@@ -33,18 +33,18 @@ namespace FailureSimulator.Tests
             int[] array = new int[] { 4, 1, 3, 0, 5 };
             var heap = new Heap<int>(new MinPriorityComparer<int>());
 
-            Assert.AreEqual(0, heap.First);
+            Assert.AreEqual(0, heap.Peek());
             heap.Pop();
-            Assert.AreEqual(1, heap.First);
+            Assert.AreEqual(1, heap.Peek());
             heap.Pop();
-            Assert.AreEqual(3, heap.First);
+            Assert.AreEqual(3, heap.Peek());
             heap.Pop();
-            Assert.AreEqual(4, heap.First);
+            Assert.AreEqual(4, heap.Peek());
             heap.Pop();
-            Assert.AreEqual(5, heap.First);
+            Assert.AreEqual(5, heap.Peek());
 
             heap.Pop();
-            Assert.ThrowsException<IndexOutOfRangeException>(() => heap.First);
+            Assert.ThrowsException<IndexOutOfRangeException>(() => heap.Peek());
             Assert.ThrowsException<IndexOutOfRangeException>(() => heap.Pop());
         }
     }

@@ -35,7 +35,7 @@ namespace FauilureSimulator.GuiTest
             graph.AddEdge("v1", "v3", 1, 0.5);
             graph.AddEdge("v3", "v4", 1, 0.5);
 
-            for(int i = 0; i<10; i++)
+            for(int i = 0; i<1; i++)
                 graph.AddEdge("v1", "v4", 1, 0.005);
             
             var sim = new Simulator(graph, new DfsPathFinder(), SimulationSettings.Default);
