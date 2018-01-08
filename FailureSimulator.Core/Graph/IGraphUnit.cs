@@ -7,11 +7,11 @@
         /// <summary>
         /// Интенсивность отказов
         /// </summary>
-        double FailIntensity { get; }
+        double FailIntensity { get; set; }
 
         /// <summary>
         /// Интенсивность восстановления
         /// </summary>
-        double RepairIntensity { get;  }
+        double RepairIntensity { get; set; }
     }
 }
