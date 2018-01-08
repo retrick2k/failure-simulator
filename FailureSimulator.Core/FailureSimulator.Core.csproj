@@ -49,6 +49,7 @@
     <Compile Include="Graph\Graph.cs" />
     <Compile Include="Graph\IGraphUnit.cs" />
     <Compile Include="Graph\Vertex.cs" />
+    <Compile Include="IO\IProjectParser.cs" />
     <Compile Include="PathAlgorithms\DfsPathFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepairPolicy\Factories\FastFirstReqairQueueFactory.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="RepairPolicy\Queues\FastFirstRepairQueue.cs" />
     <Compile Include="RepairPolicy\Queues\ImportantFirstRepairQueue.cs" />
     <Compile Include="RepairPolicy\Queues\LifoRepairQueue.cs" />
+    <Compile Include="SimulationProject.cs" />
     <Compile Include="Simulator\ComputationGraph.cs" />
     <Compile Include="Simulator\DestroyableElement.cs" />
     <Compile Include="Simulator\Distribution.cs" />

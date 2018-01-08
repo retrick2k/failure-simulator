@@ -20,7 +20,7 @@ namespace FailureSimulator.Core.Simulator
         private Graph.Graph _graph;
         private Random _rnd;
         private Distribution _distribution;
-        private SimulationSettings _settings;
+        //private SimulationSettings _settings;
 
         public Simulator(Graph.Graph graph, IPathFinder pathFinder, SimulationSettings settings)
         {
@@ -29,10 +29,10 @@ namespace FailureSimulator.Core.Simulator
             _rnd = new Random();
             _distribution = new Distribution(_rnd);
 
-            _settings = settings;
+            //_settings = settings;
         }
 
-        public SimulationReport Simulate(Vertex start, Vertex end)
+        public SimulationReport Simulate(Vertex start, Vertex end, SimulationSettings settings)
         {
             var failureTimes = new List<double>();
             var repairTimes = new List<double>();
@@ -40,13 +40,13 @@ namespace FailureSimulator.Core.Simulator
 
 
             // Симуляция
-            for (int i = 0; i < _settings.NumRuns; i++)
+            for (int i = 0; i < settings.NumRuns; i++)
             {
                 cGraph.Reset();
-                var rep = RunIteration(cGraph);
+                var rep = RunIteration(cGraph, settings);
 
                 // Все, что больше MaxTime - мусор
-                if (rep.FailureTime <= _settings.MaxTime)
+                if (rep.FailureTime <= settings.MaxTime)
                     failureTimes.Add(rep.FailureTime);
 
                 repairTimes.AddRange(rep.RepairTimes);
@@ -64,21 +64,21 @@ namespace FailureSimulator.Core.Simulator
             report.Pathes = cGraph.Pathes;
             // TODO: Вероятность безотказной работы системы
             // TODO: Гррафик зависимости безотказной работы системы от времени Pc(t)
-            report.FailureBarChart = ToHistogram(failureTimes, _settings.BarChartCount, report.MinFailureTime, report.MaxFailureTime);
+            report.FailureBarChart = ToHistogram(failureTimes, settings.BarChartCount, report.MinFailureTime, report.MaxFailureTime);
 
             if(repairTimes.Count > 0)
-                report.RepairBarChart =  ToHistogram(repairTimes, _settings.BarChartCount);
+                report.RepairBarChart =  ToHistogram(repairTimes, settings.BarChartCount);
 
             // Отдельный запуск для сохранения диаграммы восстановления
             cGraph.Reset();
-            report.TimeDiagram = RunIteration(cGraph, true).TimeDiagram;
+            report.TimeDiagram = RunIteration(cGraph, settings, true).TimeDiagram;
 
 
             return report;
         }
 
         // Симлуляция одной итерации до отказа (или истечения времени)
-        private IterationReport RunIteration(ComputationGraph cGraph, bool saveTimeline = false)
+        private IterationReport RunIteration(ComputationGraph cGraph, SimulationSettings settings, bool saveTimeline = false)
         {
             /* Идея алгоритма
              *  Есть события (отказ или восстанолвение), которые
@@ -112,16 +112,16 @@ namespace FailureSimulator.Core.Simulator
             }
 
             var heap = new Heap<SimulationEvent>(new MinPriorityComparer<SimulationEvent>());
-            var repairQueue = _settings.RepairFactory.CreateQueue();
+            var repairQueue = settings.RepairFactory.CreateQueue();
 
             double t = 0;
-            int freeWorkers = _settings.RepairTeamsCount;
+            int freeWorkers = settings.RepairTeamsCount;
 
             // Генерируем первый отказ
             SimulationEvent ev = GenerateFailureEvent(cGraph, t);
             heap.Add(ev);
 
-            while (cGraph.IsPathExists() && t < _settings.MaxTime)
+            while (cGraph.IsPathExists() && t < settings.MaxTime)
             {
 
                 ev = heap.Pop();
@@ -132,8 +132,8 @@ namespace FailureSimulator.Core.Simulator
                     ev.Element.IsDestroyed = true;
 
                     // Добавляем задачу в очередь на восстановление
-                    if (_settings.IsRepair)
-                        CreateRepairTask(ev, t, repairQueue);
+                    if (settings.IsRepair)
+                        CreateRepairTask(ev, t, settings.RepairIntensity, repairQueue);
 
                     // Сохраняем событие на диаграмме
                     if (saveTimeline)
@@ -153,7 +153,7 @@ namespace FailureSimulator.Core.Simulator
                 }
 
                 // Начинаем восстанвливать
-                while (freeWorkers > 0 && repairQueue.Count > 0 && _settings.IsRepair)
+                while (freeWorkers > 0 && repairQueue.Count > 0 && settings.IsRepair)
                 {
                     var task = repairQueue.Pop();
                     ev = new SimulationEvent()
@@ -181,13 +181,13 @@ namespace FailureSimulator.Core.Simulator
 
 
         // Создает новую заявку на восстановление
-        private void CreateRepairTask(SimulationEvent ev, double t, IRepairQueue repairQueue)
+        private void CreateRepairTask(SimulationEvent ev, double t,  double repairIntensity, IRepairQueue repairQueue)
         {
             var task = new RepairTask()
             {
                 Element = ev.Element,
                 FailTime = t,
-                TimeToRepair = GetRepairTime(ev.Element)
+                TimeToRepair = GetRepairTime(ev.Element, repairIntensity)
             };
 
             repairQueue.Add(task);
@@ -261,9 +261,9 @@ namespace FailureSimulator.Core.Simulator
         }
 
         // Генерация времени восстановления
-        private double GetRepairTime(DestroyableElement element)
+        private double GetRepairTime(DestroyableElement element, double repairIntensity)
         {
-            return _distribution.Exponential(_settings.RepairIntensity);
+            return _distribution.Exponential(repairIntensity);
         }
 
 
