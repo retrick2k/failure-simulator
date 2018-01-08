@@ -81,6 +81,7 @@ namespace FailureSimulator.Core.Simulator
             cGraph.Reset();
             report.TimeDiagram = RunIteration(cGraph, settings, true).TimeDiagram;
 
+            progress?.Report(100);
 
             return report;
         }
