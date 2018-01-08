@@ -9,5 +9,11 @@ namespace FailureSimulator.Core
     {
         public Graph.Graph Graph { get; set; }
         public SimulationSettings SimulationSettings { get; set; }
+
+        public SimulationProject()
+        {
+            Graph = new Graph.Graph();
+            SimulationSettings = SimulationSettings.Default;
+        }
     }
 }
