@@ -22,10 +22,10 @@ namespace FailureSimulator.Tests
         public void FindPath_1()
         {
             var graph = new Graph();
-            var v0 = graph.AddVertex(new Vertex("0"));
-            var v1 = graph.AddVertex(new Vertex("1"));
-            var v2 = graph.AddVertex(new Vertex("2"));
-            var v3 = graph.AddVertex(new Vertex("3"));
+            var v0 = graph.AddVertex(new Vertex("0", 0));
+            var v1 = graph.AddVertex(new Vertex("1", 0));
+            var v2 = graph.AddVertex(new Vertex("2", 0));
+            var v3 = graph.AddVertex(new Vertex("3", 0));
             graph.AddEdge("0", "1");
             graph.AddEdge("0", "2");
             graph.AddEdge("2", "1");
@@ -47,10 +47,10 @@ namespace FailureSimulator.Tests
         public void FindPath_2()
         {
             var graph = new Graph();
-            var v0 = graph.AddVertex(new Vertex("0"));
-            var v1 = graph.AddVertex(new Vertex("1"));
-            var v2 = graph.AddVertex(new Vertex("2"));
-            var v3 = graph.AddVertex(new Vertex("3"));
+            var v0 = graph.AddVertex(new Vertex("0", 0));
+            var v1 = graph.AddVertex(new Vertex("1", 0));
+            var v2 = graph.AddVertex(new Vertex("2", 0));
+            var v3 = graph.AddVertex(new Vertex("3", 0));
             graph.AddEdge("0", "1"); graph.AddEdge("1", "0");
             graph.AddEdge("0", "2"); graph.AddEdge("2", "0");
             graph.AddEdge("2", "1"); graph.AddEdge("1", "2");

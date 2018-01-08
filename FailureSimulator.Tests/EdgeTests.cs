@@ -12,24 +12,12 @@ namespace FailureSimulator.Tests
         [TestMethod]
         public void CreateEdge_ok()
         {
-            var from = new Vertex("from");
-            var vertex = new Vertex("vertex");
-            var edge = new Edge(from, vertex, 2, 0.5);
+            var from = new Vertex("from", 0);
+            var vertex = new Vertex("vertex", 0);
+            var edge = new Edge(from, vertex, 0.5);
 
-            Assert.AreEqual(vertex, edge.VertexTo);
-            Assert.AreEqual(2, edge.Length);
-            Assert.AreEqual(0.5, edge.SpecificFailIntensity);
-        }
-
-
-        [TestMethod]
-        public void Intensity()
-        {
-            var from = new Vertex("from");
-            var vertex = new Vertex("vertex");
-            var edge = new Edge(from, vertex, 2, 0.5);
-
-            Assert.AreEqual(2 * 0.5, edge.FailIntensity);
+            Assert.AreEqual(vertex, edge.VertexTo);            
+            Assert.AreEqual(0.5, edge.FailIntensity);
         }
     }
 }

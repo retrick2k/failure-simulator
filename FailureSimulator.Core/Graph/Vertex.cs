@@ -17,15 +17,9 @@ namespace FailureSimulator.Core.Graph
         public string Name { get; set; }
 
         /// <summary>
-        /// Список элементов, из которых состоит вершина
-        /// </summary>
-        public List<(Element Element, int Amount)> Elements { get; private set; }
-
-
-        /// <summary>
         /// Интенсивность отказов узла
         /// </summary>
-        public double FailIntensity => Elements.Sum(e => e.Amount * e.Element.Intensity);
+        public double FailIntensity { get; set; }
 
         /// <summary>
         /// Интенсивность восстановления
@@ -38,11 +32,11 @@ namespace FailureSimulator.Core.Graph
         public IReadOnlyList<Edge> Edges => _edges.AsReadOnly();
 
 
-        public Vertex(string name)
+        public Vertex(string name, double failIntensity)
         {
             Name = name;
-            Elements = new List<(Element Element, int Amount)>();
             _edges = new List<Edge>();
+            FailIntensity = failIntensity;
         }
 
 
@@ -50,12 +44,11 @@ namespace FailureSimulator.Core.Graph
         /// Добавляет ориентированное ребро, выходящее из вершины
         /// </summary>
         /// <param name="other">Вершина, в которую войдет ребро</param>
-        /// <param name="length">Длина ребра</param>
-        /// <param name="intentiy">Интенсивность отказов единицы длины ребра</param>
+        /// <param name="failIntensity">Интенсивность отказов ребра</param>
         /// <returns>Созданное ребро</returns>
-        public Edge AddEdge(Vertex other, double length=0, double intentiy=0)
+        public Edge AddEdge(Vertex other, double failIntensity=0)
         {
-            var edge = new Edge(this, other, length, intentiy);
+            var edge = new Edge(this, other, failIntensity);
             _edges.Add(edge);
             return edge;
         }

@@ -26,7 +26,7 @@ namespace FailureSimulator.Core.Simulator
         /// <summary>
         /// Есть ли восстановление
         /// </summary>
-        public bool IsRepair { get; set; } = true;
+        public bool IsRepair { get; set; } = false;
 
         /// <summary>
         /// Число ремонтных бригад
@@ -36,7 +36,7 @@ namespace FailureSimulator.Core.Simulator
         /// <summary>
         /// Интенсивность восстановления
         /// </summary>
-        public double RepairIntensity { get; set; } = 0.01;
+        public double RepairIntensity { get; set; } = 0.7;
 
         public IRepairFactory RepairFactory { get; set; } = new FifoRepairQueueFactory();
 

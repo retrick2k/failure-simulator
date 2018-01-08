@@ -8,24 +8,14 @@
         // Костыль, но исключительно чтобы можно было выводить имена вида
         // от -> до
         private Vertex _vertexFrom;
-      
-
-        /// <summary>
-        /// Длина связи
-        /// </summary>
-        public double Length { get; set; }
-
-        /// <summary>
-        /// Удельная интенсивость отказов
-        /// </summary>
-        public double SpecificFailIntensity { get; set; }
-
+             
+        
         public string Name => $"{_vertexFrom} -> {VertexTo.Name}";
 
         /// <summary>
         /// Интенсивность отказов всей связи
         /// </summary>
-        public double FailIntensity => Length * SpecificFailIntensity;
+        public double FailIntensity { get; set; }
 
         /// <summary>
         /// Интенсивность восстановления
@@ -38,13 +28,12 @@
         public Vertex VertexTo { get; private set; }
 
 
-        public Edge(Vertex from, Vertex to, double length = 0, double intensiy = 0)
+        public Edge(Vertex from, Vertex to, double failIntensity = 0)
         {
 
             _vertexFrom = from;
             VertexTo = to;
-            Length = length;
-            SpecificFailIntensity = intensiy;
+            FailIntensity = failIntensity;
         }
 
         public override string ToString() => Name;

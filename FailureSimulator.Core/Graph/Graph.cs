@@ -26,15 +26,10 @@ namespace FailureSimulator.Core.Graph
         //public Dictionary<string, VertexTo> VertexTo { get; private set; }
         public IReadOnlyList<Vertex> Vertex => _vertex.AsReadOnly();
 
-        /// <summary>
-        /// Список элементов, из которых состоят вершины (узлы)
-        /// </summary>
-        public List<Element> Elements { get; private set; }
 
         public Graph()
         {
             _vertex = new List<Vertex>();
-            Elements = new List<Element>();
         }
 
 
@@ -66,17 +61,16 @@ namespace FailureSimulator.Core.Graph
         /// </summary>
         /// <param name="vertexA">Имя вершины, из которой выходит ребро</param>
         /// <param name="vertexB">Имя вершины, в которую входит ребро</param>
-        /// <param name="length">Длина ребра</param>
         /// <param name="intensity">Интенсивность отказов на единицу длины ребра</param>
         /// <returns>Созданное ребро</returns>
         /// <exception cref="ArgumentNullException">Одна из указанных вершин - null</exception>
         /// <exception cref="ArgumentException">Одна из указанных вершин отсутствует в графе</exception>
-        public Edge AddEdge(string vertexA, string vertexB, double length = 0, double intensity = 0)
+        public Edge AddEdge(string vertexA, string vertexB, double intensity = 0)
         {
             AssertVertexExists(vertexA);
             AssertVertexExists(vertexB);
 
-            return _getVertex(vertexA).AddEdge(_getVertex(vertexB), length, intensity);
+            return _getVertex(vertexA).AddEdge(_getVertex(vertexB), intensity);
         }
 
         /// <summary>
@@ -84,15 +78,14 @@ namespace FailureSimulator.Core.Graph
         /// </summary>
         /// <param name="vertexA">Вершина, из которой выходит ребро</param>
         /// <param name="vertexB">Вершина, в которую входит ребро</param>
-        /// <param name="length">Длина ребра</param>
         /// <param name="intensity">Интенсивность отказов на единицу длины ребра</param>
         /// <returns>Созданное ребро</returns>
-        public Edge AddEdge(Vertex vertexA, Vertex vertexB, double length = 0, double intensity = 0)
+        public Edge AddEdge(Vertex vertexA, Vertex vertexB, double intensity = 0)
         {
             AssertVertexExists(vertexA);
             AssertVertexExists(vertexB);
 
-            return vertexA.AddEdge(vertexB, length, intensity);
+            return vertexA.AddEdge(vertexB, intensity);
         }
 
 

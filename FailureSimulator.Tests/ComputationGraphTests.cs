@@ -12,10 +12,10 @@ namespace FailureSimulator.Tests
         public void TestEcnounters()
         {
             var graph = new Graph();
-            var v1 = graph.AddVertex(new Vertex("v1"));
-            var v2 = graph.AddVertex(new Vertex("v2"));
-            var v3 = graph.AddVertex(new Vertex("v3"));
-            var v4 = graph.AddVertex(new Vertex("v4"));
+            var v1 = graph.AddVertex(new Vertex("v1", 0));
+            var v2 = graph.AddVertex(new Vertex("v2", 0));
+            var v3 = graph.AddVertex(new Vertex("v3", 0));
+            var v4 = graph.AddVertex(new Vertex("v4", 0));
 
             var v1v2 = graph.AddEdge("v1", "v2");
             var v2v4 = graph.AddEdge("v2", "v4");
