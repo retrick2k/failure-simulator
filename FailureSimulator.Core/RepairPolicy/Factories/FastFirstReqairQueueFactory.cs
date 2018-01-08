@@ -2,13 +2,13 @@
 
 namespace FailureSimulator.Core.RepairPolicy.Factories
 {
-    public class FastFirstReqairQueueFactory : IRepairFactory
+    public class FastFirstReqairQueueFactory : BaseRepqairQueueFactory
     {
-        public IRepairQueue CreateQueue()
+        public override IRepairQueue CreateQueue()
         {
             return new FastFirstRepairQueue();
         }
 
-        public string Name => "Сначала быстро восстановимые";
+        public override string Name => "Сначала быстро восстановимые";        
     }
 }

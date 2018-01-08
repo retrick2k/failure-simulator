@@ -17,26 +17,23 @@ namespace FailureSimulator.Core.Simulator
     {
 
         private IPathFinder _pathFinder;
-        private Graph.Graph _graph;
         private Random _rnd;
         private Distribution _distribution;
-        //private SimulationSettings _settings;
 
-        public Simulator(Graph.Graph graph, IPathFinder pathFinder)
+        public Simulator(IPathFinder pathFinder)
         {
             _pathFinder = pathFinder;
-            _graph = graph;
             _rnd = new Random();
             _distribution = new Distribution(_rnd);
 
             //_settings = settings;
         }
 
-        public SimulationReport Simulate(Vertex start, Vertex end, SimulationSettings settings)
+        public SimulationReport Simulate(Graph.Graph graph, Vertex start, Vertex end, SimulationSettings settings)
         {
             var failureTimes = new List<double>();
             var repairTimes = new List<double>();
-            var cGraph = new ComputationGraph(_graph, _pathFinder, start, end);
+            var cGraph = new ComputationGraph(graph, _pathFinder, start, end);
 
 
             // Симуляция

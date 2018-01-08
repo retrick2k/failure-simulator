@@ -38,8 +38,8 @@ namespace FauilureSimulator.GuiTest
             for(int i = 0; i<1; i++)
                 graph.AddEdge("v1", "v4", 0.005);
             
-            var sim = new Simulator(graph, new DfsPathFinder());
-            var report = sim.Simulate(start, end, SimulationSettings.Default);
+            var sim = new Simulator(new DfsPathFinder());
+            var report = sim.Simulate(graph, start, end, SimulationSettings.Default);
 
             PrintValue("Min fail time", report.MinFailureTime);
             PrintValue("Max fail time", report.MaxFailureTime);

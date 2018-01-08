@@ -24,8 +24,8 @@ namespace FailureSimulator.Console
             graph.AddEdge("v3", "v2", 0.00);
             graph.AddEdge("v4", "v2", 0.00);
             
-            var sim = new Simulator(graph, new DfsPathFinder());
-            var report = sim.Simulate(v1, v2, SimulationSettings.Default);
+            var sim = new Simulator(new DfsPathFinder());
+            var report = sim.Simulate(graph, v1, v2, SimulationSettings.Default);
 
             PrintValue("Min fail time", report.MinFailureTime);
             PrintValue("Max fail time", report.MaxFailureTime);

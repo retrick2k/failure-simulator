@@ -2,13 +2,13 @@
 
 namespace FailureSimulator.Core.RepairPolicy.Factories
 {
-    public class ImportantFirstRepairQueueFactory : IRepairFactory
+    public class ImportantFirstRepairQueueFactory : BaseRepqairQueueFactory
     {
-        public IRepairQueue CreateQueue()
+        public override IRepairQueue CreateQueue()
         {
             return new ImportantFirstRepairQueue();
         }
 
-        public string Name => "Сначала важные";
+        public override string Name => "Сначала важные";
     }
 }

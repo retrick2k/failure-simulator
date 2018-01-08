@@ -2,13 +2,13 @@
 
 namespace FailureSimulator.Core.RepairPolicy.Factories
 {
-    public class LifoRepairQueueFactory : IRepairFactory
+    public class LifoRepairQueueFactory : BaseRepqairQueueFactory
     {
-        public IRepairQueue CreateQueue()
+        public override IRepairQueue CreateQueue()
         {
             return new LifoRepairQueue();
         }
 
-        public string Name => "LIFO";
+        public override string Name => "LIFO";
     }
 }
