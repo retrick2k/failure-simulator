@@ -22,7 +22,7 @@ namespace FailureSimulator.Core.Simulator
         private Distribution _distribution;
         //private SimulationSettings _settings;
 
-        public Simulator(Graph.Graph graph, IPathFinder pathFinder, SimulationSettings settings)
+        public Simulator(Graph.Graph graph, IPathFinder pathFinder)
         {
             _pathFinder = pathFinder;
             _graph = graph;
@@ -66,8 +66,8 @@ namespace FailureSimulator.Core.Simulator
             // TODO: Гррафик зависимости безотказной работы системы от времени Pc(t)
             report.FailureBarChart = ToHistogram(failureTimes, settings.BarChartCount, report.MinFailureTime, report.MaxFailureTime);
 
-            if(repairTimes.Count > 0)
-                report.RepairBarChart =  ToHistogram(repairTimes, settings.BarChartCount);
+            if (repairTimes.Count > 0)
+                report.RepairBarChart = ToHistogram(repairTimes, settings.BarChartCount);
 
             // Отдельный запуск для сохранения диаграммы восстановления
             cGraph.Reset();
@@ -108,7 +108,11 @@ namespace FailureSimulator.Core.Simulator
             {
                 diagram = new TimeDiagram();
                 foreach (var element in cGraph.Elements)
-                    diagram.Add(element.Value.Data, new TimeLine());
+                {
+                    var tl = new TimeLine();
+                    tl.Add(new StatePoint(){State = ElementState.OK, Time = 0});
+                    diagram.Add(element.Value.Data, tl);                    
+                }
             }
 
             var heap = new Heap<SimulationEvent>(new MinPriorityComparer<SimulationEvent>());
@@ -138,7 +142,7 @@ namespace FailureSimulator.Core.Simulator
                     // Сохраняем событие на диаграмме
                     if (saveTimeline)
                         SaveEvent(diagram, ev.Element, ElementState.FAILURE, t);
-                    
+
                     ev = GenerateFailureEvent(cGraph, t);
                     heap.Add(ev);
                 }
@@ -149,7 +153,7 @@ namespace FailureSimulator.Core.Simulator
 
                     // Сохраняем событие на диаграмме
                     if (saveTimeline)
-                        SaveEvent(diagram, ev.Element, ElementState.REPAIR, t);
+                        SaveEvent(diagram, ev.Element, ElementState.OK, t);
                 }
 
                 // Начинаем восстанвливать
@@ -162,12 +166,16 @@ namespace FailureSimulator.Core.Simulator
                         Time = t + task.TimeToRepair,
                         Type = EventType.REPAIR
                     };
-                    
+
                     heap.Add(ev);
                     freeWorkers--;
 
                     // Сохраняем статистику по восстановлению
                     repairTimeList.Add(task.TimeToRepair);
+
+                    // Сохраняем событие на диаграмме
+                    if (saveTimeline)
+                        SaveEvent(diagram, ev.Element, ElementState.REPAIR, t);
                 }
             }
 
@@ -181,7 +189,7 @@ namespace FailureSimulator.Core.Simulator
 
 
         // Создает новую заявку на восстановление
-        private void CreateRepairTask(SimulationEvent ev, double t,  double repairIntensity, IRepairQueue repairQueue)
+        private void CreateRepairTask(SimulationEvent ev, double t, double repairIntensity, IRepairQueue repairQueue)
         {
             var task = new RepairTask()
             {
@@ -197,7 +205,7 @@ namespace FailureSimulator.Core.Simulator
         // Добавляет новое событие на диаграмму
         private void SaveEvent(TimeDiagram diagram, DestroyableElement e, ElementState state, double t)
         {
-            diagram[e.Data].Add(new StatePoint(){Time = t, State = state});
+            diagram[e.Data].Add(new StatePoint() { Time = t, State = state });
         }
 
 

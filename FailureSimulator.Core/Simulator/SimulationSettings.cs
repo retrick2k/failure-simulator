@@ -26,7 +26,7 @@ namespace FailureSimulator.Core.Simulator
         /// <summary>
         /// Есть ли восстановление
         /// </summary>
-        public bool IsRepair { get; set; } = false;
+        public bool IsRepair { get; set; } = true;
 
         /// <summary>
         /// Число ремонтных бригад
