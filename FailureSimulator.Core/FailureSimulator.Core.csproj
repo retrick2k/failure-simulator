@@ -65,6 +65,7 @@
     <Compile Include="RepairPolicy\Queues\FifoRepairQueue.cs" />
     <Compile Include="RepairPolicy\IRepairFactory.cs" />
     <Compile Include="RepairPolicy\IRepairQueue.cs" />
+    <Compile Include="Simulator\IterationReport.cs" />
     <Compile Include="Simulator\RepairTask.cs" />
     <Compile Include="Simulator\Report\Point.cs" />
     <Compile Include="Simulator\Report\SimulationReport.cs" />

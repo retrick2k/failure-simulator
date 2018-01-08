@@ -57,7 +57,7 @@ namespace FailureSimulator.Tests
 
             var edge1 = graph.AddEdge(vertex1, vertex2);
             Assert.AreSame(edge1, graph.Vertex[0].Edges[0]);
-            Assert.AreSame(vertex2, graph.Vertex[0].Edges[0].Vertex);
+            Assert.AreSame(vertex2, graph.Vertex[0].Edges[0].VertexTo);
             Assert.AreEqual(1, graph.Vertex[0].Edges.Count);
         }
 
@@ -72,7 +72,7 @@ namespace FailureSimulator.Tests
 
             var edge1 = graph.AddEdge(vertex1, vertex2);
             Assert.AreSame(edge1, graph.Vertex[0].Edges[0]);
-            Assert.AreSame(vertex2, graph.Vertex[0].Edges[0].Vertex);
+            Assert.AreSame(vertex2, graph.Vertex[0].Edges[0].VertexTo);
             Assert.AreEqual(1, graph.Vertex[0].Edges.Count);
         }
 
@@ -117,7 +117,7 @@ namespace FailureSimulator.Tests
 
             var edge1 = graph.AddEdge("vertex1", "vertex2");
             Assert.AreSame(edge1, graph.Vertex[0].Edges[0]);
-            Assert.AreSame(vertex2, graph.Vertex[0].Edges[0].Vertex);
+            Assert.AreSame(vertex2, graph.Vertex[0].Edges[0].VertexTo);
             Assert.AreEqual(1, graph.Vertex[0].Edges.Count);
         }
 

@@ -55,7 +55,7 @@ namespace FailureSimulator.Core.Graph
         /// <returns>Созданное ребро</returns>
         public Edge AddEdge(Vertex other, double length=0, double intentiy=0)
         {
-            var edge = new Edge(other, length, intentiy);
+            var edge = new Edge(this, other, length, intentiy);
             _edges.Add(edge);
             return edge;
         }
@@ -103,7 +103,7 @@ namespace FailureSimulator.Core.Graph
                 throw new ArgumentNullException(nameof(edge));
 
             if(!_edges.Contains(edge))
-                throw new ArgumentException($"Ребро {Name} - {edge.Vertex.Name} отсутствует в графе");
+                throw new ArgumentException($"Ребро {Name} - {edge.VertexTo.Name} отсутствует в графе");
 
             _edges.Remove(edge);
         }
@@ -118,7 +118,7 @@ namespace FailureSimulator.Core.Graph
             if(otherName == null)
                 throw new ArgumentNullException(nameof(otherName));
 
-            return Edges.FirstOrDefault(x => x.Vertex.Name == otherName);
+            return Edges.FirstOrDefault(x => x.VertexTo.Name == otherName);
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace FailureSimulator.Core.Graph
             if(otherVertex == null)
                 throw new ArgumentNullException(nameof(otherVertex));
 
-            return Edges.FirstOrDefault(x => x.Vertex == otherVertex);
+            return Edges.FirstOrDefault(x => x.VertexTo == otherVertex);
         }
 
         public override string ToString()

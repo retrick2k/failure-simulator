@@ -11,7 +11,7 @@ namespace FailureSimulator.Core.Simulator
         /// <summary>
         /// Количество запусков моделирования
         /// </summary>
-        public int NumRuns { get; set; } = 3000;
+        public int NumRuns { get; set; } = 5000;
 
         /// <summary>
         /// Максимальное время одной итерации
@@ -36,7 +36,7 @@ namespace FailureSimulator.Core.Simulator
         /// <summary>
         /// Интенсивность восстановления
         /// </summary>
-        public double RepairIntensity { get; set; } = 0.1;
+        public double RepairIntensity { get; set; } = 0.01;
 
         public IRepairFactory RepairFactory { get; set; } = new FifoRepairQueueFactory();
 

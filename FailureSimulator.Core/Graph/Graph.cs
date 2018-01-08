@@ -23,7 +23,7 @@ namespace FailureSimulator.Core.Graph
         /// <summary>
         /// Список вершин графа
         /// </summary>
-        //public Dictionary<string, Vertex> Vertex { get; private set; }
+        //public Dictionary<string, VertexTo> VertexTo { get; private set; }
         public IReadOnlyList<Vertex> Vertex => _vertex.AsReadOnly();
 
         /// <summary>

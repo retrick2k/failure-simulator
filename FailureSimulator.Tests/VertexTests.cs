@@ -24,7 +24,7 @@ namespace FailureSimulator.Tests
             var edge1 = vertex1.AddEdge(vertex2);
 
             var edge2 = vertex1.Edges[0];
-            Assert.AreSame(edge2.Vertex, vertex2);
+            Assert.AreSame(edge2.VertexTo, vertex2);
             Assert.AreSame(edge1, edge2);
         }
 
@@ -119,7 +119,7 @@ namespace FailureSimulator.Tests
             var vertex2 = new Vertex("vertex2");
             vertex1.AddEdge(vertex2);
 
-            var edge = new Edge(new Vertex("vertex3"));
+            var edge = new Edge(vertex1, new Vertex("vertex3"));
             Assert.ThrowsException<ArgumentException>(() => vertex1.RemoveEdge(edge));
         }
 

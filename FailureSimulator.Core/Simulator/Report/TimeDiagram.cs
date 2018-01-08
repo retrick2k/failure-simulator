@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using FailureSimulator.Core.Graph;
 
 namespace FailureSimulator.Core.Simulator.Report
 {
@@ -11,8 +13,39 @@ namespace FailureSimulator.Core.Simulator.Report
     /// Ключ - имя элемента
     /// Значение - последовательность состояний
     /// </summary>
-    public class TimeDiagram : Dictionary<string, TimeLine> { }
+    public class TimeDiagram : Dictionary<IGraphUnit, TimeLine> { }
 
+    /*public class TimeDiagram : IEnumerable<TimeLine>
+    {
+        private Dictionary<IGraphUnit, TimeLine> _dict;
+
+        public TimeDiagram()
+        {
+            _dict = new Dictionary<IGraphUnit, TimeLine>();
+        }
+
+        public TimeDiagram(IReadOnlyDictionary<IGraphUnit, DestroyableElement> elements)
+        {
+            _dict = new Dictionary<IGraphUnit, TimeLine>(elements.Count);
+            foreach (var element in elements)
+                _dict.Add(element.Key, new TimeLine());
+        }
+
+        public void Add(IGraphUnit element)
+        {
+            _dict.Add(element, new TimeLine());
+        }
+
+        public IEnumerator<TimeLine> GetEnumerator()
+        {
+            return _dict.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _dict.GetEnumerator();
+        }
+    }*/
 
     /// <summary>
     /// Последовательность смены состояний элемента во времени
@@ -37,5 +70,10 @@ namespace FailureSimulator.Core.Simulator.Report
     {
         public ElementState State { get; set; }
         public double Time { get; set; }
+
+        public override string ToString()
+        {
+            return $"{State} ({Time})";
+        }
     }
 }

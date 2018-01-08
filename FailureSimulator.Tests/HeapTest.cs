@@ -22,7 +22,7 @@ namespace FailureSimulator.Tests
         public void CreateFromElements()
         {
             int[] array = new int[]{4, 1, 3, 0, 5};
-            var heap = new Heap<int>(new MinPriorityComparer<int>());
+            var heap = new Heap<int>(new MinPriorityComparer<int>(), array);
 
             Assert.AreEqual(0, heap.Peek());
         }
@@ -31,7 +31,7 @@ namespace FailureSimulator.Tests
         public void RemoveElementsd()
         {
             int[] array = new int[] { 4, 1, 3, 0, 5 };
-            var heap = new Heap<int>(new MinPriorityComparer<int>());
+            var heap = new Heap<int>(new MinPriorityComparer<int>(), array);
 
             Assert.AreEqual(0, heap.Peek());
             heap.Pop();

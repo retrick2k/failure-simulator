@@ -75,10 +75,10 @@ namespace FailureSimulator.Core.PathAlgorithms
 
             foreach (var edge in currentVertex.Edges)
             {
-                if (common.isVisted[edge.Vertex])
+                if (common.isVisted[edge.VertexTo])
                     continue;
 
-                dfs(edge.Vertex, common);
+                dfs(edge.VertexTo, common);
             }
 
             common.isVisted[currentVertex] = false;

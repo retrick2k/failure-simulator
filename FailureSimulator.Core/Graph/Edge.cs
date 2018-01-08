@@ -5,6 +5,11 @@
     /// </summary>
     public class Edge : IGraphUnit
     {
+        // Костыль, но исключительно чтобы можно было выводить имена вида
+        // от -> до
+        private Vertex _vertexFrom;
+      
+
         /// <summary>
         /// Длина связи
         /// </summary>
@@ -15,7 +20,7 @@
         /// </summary>
         public double SpecificFailIntensity { get; set; }
 
-        public string Name => $"-> {Vertex.Name}";
+        public string Name => $"{_vertexFrom} -> {VertexTo.Name}";
 
         /// <summary>
         /// Интенсивность отказов всей связи
@@ -30,17 +35,19 @@
         /// <summary>
         /// Вершина, в которую направлено ребро
         /// </summary>
-        public Vertex Vertex { get; private set; }
+        public Vertex VertexTo { get; private set; }
 
 
-        public Edge(Vertex vertex, double length = 0, double intensiy = 0)
+        public Edge(Vertex from, Vertex to, double length = 0, double intensiy = 0)
         {
-            Vertex = vertex;
+
+            _vertexFrom = from;
+            VertexTo = to;
             Length = length;
             SpecificFailIntensity = intensiy;
         }
 
-        public override string ToString() => $"-> {Vertex.Name}";
+        public override string ToString() => Name;
 
     }
 }

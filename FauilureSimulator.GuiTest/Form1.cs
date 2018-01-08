@@ -11,6 +11,7 @@ using FailureSimulator.Core.Graph;
 using FailureSimulator.Core.PathAlgorithms;
 using FailureSimulator.Core.Simulator;
 using ZedGraph;
+using Point = FailureSimulator.Core.Simulator.Report.Point;
 
 namespace FauilureSimulator.GuiTest
 {
@@ -35,6 +36,7 @@ namespace FauilureSimulator.GuiTest
             graph.AddEdge("v1", "v3", 1, 0.5);
             graph.AddEdge("v3", "v4", 1, 0.5);
 
+
             for(int i = 0; i<1; i++)
                 graph.AddEdge("v1", "v4", 1, 0.005);
             
@@ -44,8 +46,8 @@ namespace FauilureSimulator.GuiTest
             PrintValue("Min fail time", report.MinFailureTime);
             PrintValue("Max fail time", report.MaxFailureTime);
             PrintValue("Average fail time", report.AverageFailureTime);
-            PrintValueNA("Average repair time");
-            PrintValueNA("Availability rate");
+            PrintValue("Average repair time", report.AverageRepairTime);
+            PrintValue("Availability rate", report.AvailabilityRate);
 
             Console.WriteLine("Pathes:");
             foreach (var path in report.Pathes)
@@ -59,19 +61,28 @@ namespace FauilureSimulator.GuiTest
             PrintValueNA("Repair bar chart");
             PrintValueNA("Time diagram");
 
+            PlotHist(zedGraphControl1, report.FailureBarChart);
+            PlotHist(zedGraphControl2, report.RepairBarChart);
+        }
+
+        private void PlotHist(ZedGraphControl graph, Point[] data)
+        {
+            if (data == null)
+                return;
+
             var points = new PointPairList();
-            foreach (var p in report.FailureBarChart)
+            foreach (var p in data)
             {
                 points.Add(p.X, p.Y);
             }
 
-            var pane = zedGraphControl1.GraphPane;
+            var pane = graph.GraphPane;
             pane.BarSettings.MinClusterGap = 0;
             pane.BarSettings.MinBarGap = 0;
             pane.AddBar("WTF", points, Color.Green);
 
-            zedGraphControl1.AxisChange();
-            zedGraphControl1.Invalidate();
+            graph.AxisChange();
+            graph.Invalidate();
         }
 
         static void PrintValue(string name, double value)
