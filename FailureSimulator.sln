@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FailureSimulator.Tests", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FauilureSimulator.GuiTest", "FauilureSimulator.GuiTest\FauilureSimulator.GuiTest.csproj", "{BF6FCAFE-D8EE-47FF-949D-F2C45322A4C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FailureSimulator.GUI", "FailureSimulator.GUI\FailureSimulator.GUI.csproj", "{24D241BD-D95F-489C-B3E1-023EFE61E70F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{BF6FCAFE-D8EE-47FF-949D-F2C45322A4C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF6FCAFE-D8EE-47FF-949D-F2C45322A4C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF6FCAFE-D8EE-47FF-949D-F2C45322A4C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24D241BD-D95F-489C-B3E1-023EFE61E70F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24D241BD-D95F-489C-B3E1-023EFE61E70F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24D241BD-D95F-489C-B3E1-023EFE61E70F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24D241BD-D95F-489C-B3E1-023EFE61E70F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
