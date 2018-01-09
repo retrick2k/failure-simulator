@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using System.Threading.Tasks;
 using FailureSimulator.Core.AbstractPathAlgorithms;
 using FailureSimulator.Core.DataStruct;
 using FailureSimulator.Core.Graph;
@@ -29,7 +31,16 @@ namespace FailureSimulator.Core.Simulator
             //_settings = settings;
         }
 
-        public SimulationReport Simulate(Graph.Graph graph, Vertex start, Vertex end, SimulationSettings settings)
+
+        /// <summary>
+        /// Запуск симуляции
+        /// </summary>
+        /// <param name="graph">Граф</param>
+        /// <param name="start">Начальная вершина</param>
+        /// <param name="end">Конечная вершина</param>
+        /// <param name="settings">Настройки симуляции</param>
+        /// <param name="progress">Програсс симуляции</param>
+        public SimulationReport Simulate(Graph.Graph graph, Vertex start, Vertex end, SimulationSettings settings, IProgress<int> progress = null)
         {
             var failureTimes = new List<double>();
             var repairTimes = new List<double>();
@@ -47,9 +58,9 @@ namespace FailureSimulator.Core.Simulator
                     failureTimes.Add(rep.FailureTime);
 
                 repairTimes.AddRange(rep.RepairTimes);
+
+                progress?.Report((int)(i/(float)settings.NumRuns*100));
             }
-
-
 
             // Формирование отчета
             var report = new SimulationReport();
@@ -70,8 +81,24 @@ namespace FailureSimulator.Core.Simulator
             cGraph.Reset();
             report.TimeDiagram = RunIteration(cGraph, settings, true).TimeDiagram;
 
+            progress?.Report(100);
 
             return report;
+        }
+
+
+        /// <summary>
+        /// Запуск симуляции в отдельном потоке
+        /// </summary>
+        /// <param name="graph">Граф</param>
+        /// <param name="start">Начальная вершина</param>
+        /// <param name="end">Конечная вершина</param>
+        /// <param name="settings">Настройки симуляции</param>
+        /// <param name="progress">Програсс симуляции</param>
+        /// <returns></returns>
+        public Task<SimulationReport> SimulateAsync(Graph.Graph graph, Vertex start, Vertex end, SimulationSettings settings, IProgress<int> progress = null)
+        {
+            return Task.Run(() => Simulate(graph, start, end, settings, progress));
         }
 
         // Симлуляция одной итерации до отказа (или истечения времени)
