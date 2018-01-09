@@ -28,15 +28,19 @@ namespace FauilureSimulator.GuiTest
             var end = graph.AddVertex(new Vertex("v4", 0));
 
 
-            graph.AddEdge("v1", "v2", 0.5);
+            /*graph.AddEdge("v1", "v2", 0.5);
             graph.AddEdge("v2", "v4", 0.5);
 
             graph.AddEdge("v1", "v3", 0.5);
-            graph.AddEdge("v3", "v4", 0.5);
+            graph.AddEdge("v3", "v4", 0.5);*/
+            graph.AddEdge("v1", "v2", 0.1);
+            graph.AddEdge("v2", "v3", 0.1);
+            graph.AddEdge("v3", "v4", 0.1);
+            graph.AddEdge("v4", "v1", 0.1);
 
 
-            for(int i = 0; i<1; i++)
-                graph.AddEdge("v1", "v4", 0.005);
+            //for (int i = 0; i<1; i++)
+            //    graph.AddEdge("v1", "v4", 0.005);
             
             var sim = new Simulator(new DfsPathFinder());
             var report = sim.Simulate(graph, start, end, SimulationSettings.Default);

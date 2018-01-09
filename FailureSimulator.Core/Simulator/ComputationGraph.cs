@@ -31,7 +31,8 @@ namespace FailureSimulator.Core.Simulator
                 _units.Add(vertex, new DestroyableElement(vertex));
 
                 foreach (var edge in vertex.Edges)
-                    _units.Add(edge, new DestroyableElement(edge));
+                    if(!_units.ContainsKey(edge))
+                        _units.Add(edge, new DestroyableElement(edge));
             }
 
             Pathes = pathFinder.FindAllPathes(graph, startVertex, endVertex);                     
