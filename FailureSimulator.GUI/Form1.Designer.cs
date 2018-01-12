@@ -66,8 +66,11 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lbPaths = new System.Windows.Forms.ListBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.zcTimeDiagram = new ZedGraph.ZedGraphControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.zcRepairBarChart = new ZedGraph.ZedGraphControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.zcFailureBarChart = new ZedGraph.ZedGraphControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.симуляцияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,9 +84,6 @@
             this.запуститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьОтчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zcRepairBarChart = new ZedGraph.ZedGraphControl();
-            this.zcFailureBarChart = new ZedGraph.ZedGraphControl();
-            this.zcTimeDiagram = new ZedGraph.ZedGraphControl();
             this.tcGraphTab.SuspendLayout();
             this.tpGraph.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -464,6 +464,22 @@
             this.tabPage1.Text = "Диаграмма восстановления";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // zcTimeDiagram
+            // 
+            this.zcTimeDiagram.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.zcTimeDiagram.Location = new System.Drawing.Point(3, 3);
+            this.zcTimeDiagram.Name = "zcTimeDiagram";
+            this.zcTimeDiagram.ScrollGrace = 0D;
+            this.zcTimeDiagram.ScrollMaxX = 0D;
+            this.zcTimeDiagram.ScrollMaxY = 0D;
+            this.zcTimeDiagram.ScrollMaxY2 = 0D;
+            this.zcTimeDiagram.ScrollMinX = 0D;
+            this.zcTimeDiagram.ScrollMinY = 0D;
+            this.zcTimeDiagram.ScrollMinY2 = 0D;
+            this.zcTimeDiagram.Size = new System.Drawing.Size(755, 385);
+            this.zcTimeDiagram.TabIndex = 0;
+            this.zcTimeDiagram.UseExtendedPrintDialog = true;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.zcRepairBarChart);
@@ -475,6 +491,22 @@
             this.tabPage3.Text = "Гистограмма восстановления";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // zcRepairBarChart
+            // 
+            this.zcRepairBarChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.zcRepairBarChart.Location = new System.Drawing.Point(3, 3);
+            this.zcRepairBarChart.Name = "zcRepairBarChart";
+            this.zcRepairBarChart.ScrollGrace = 0D;
+            this.zcRepairBarChart.ScrollMaxX = 0D;
+            this.zcRepairBarChart.ScrollMaxY = 0D;
+            this.zcRepairBarChart.ScrollMaxY2 = 0D;
+            this.zcRepairBarChart.ScrollMinX = 0D;
+            this.zcRepairBarChart.ScrollMinY = 0D;
+            this.zcRepairBarChart.ScrollMinY2 = 0D;
+            this.zcRepairBarChart.Size = new System.Drawing.Size(755, 385);
+            this.zcRepairBarChart.TabIndex = 1;
+            this.zcRepairBarChart.UseExtendedPrintDialog = true;
+            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.zcFailureBarChart);
@@ -485,6 +517,22 @@
             this.tabPage4.TabIndex = 4;
             this.tabPage4.Text = "Гистограмма отказов";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // zcFailureBarChart
+            // 
+            this.zcFailureBarChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.zcFailureBarChart.Location = new System.Drawing.Point(3, 3);
+            this.zcFailureBarChart.Name = "zcFailureBarChart";
+            this.zcFailureBarChart.ScrollGrace = 0D;
+            this.zcFailureBarChart.ScrollMaxX = 0D;
+            this.zcFailureBarChart.ScrollMaxY = 0D;
+            this.zcFailureBarChart.ScrollMaxY2 = 0D;
+            this.zcFailureBarChart.ScrollMinX = 0D;
+            this.zcFailureBarChart.ScrollMinY = 0D;
+            this.zcFailureBarChart.ScrollMinY2 = 0D;
+            this.zcFailureBarChart.Size = new System.Drawing.Size(755, 385);
+            this.zcFailureBarChart.TabIndex = 0;
+            this.zcFailureBarChart.UseExtendedPrintDialog = true;
             // 
             // groupBox1
             // 
@@ -542,13 +590,14 @@
             // тестШинаToolStripMenuItem
             // 
             this.тестШинаToolStripMenuItem.Name = "тестШинаToolStripMenuItem";
-            this.тестШинаToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.тестШинаToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.тестШинаToolStripMenuItem.Text = "Звезда";
+            this.тестШинаToolStripMenuItem.Click += new System.EventHandler(this.тестШинаToolStripMenuItem_Click);
             // 
             // шинаToolStripMenuItem
             // 
             this.шинаToolStripMenuItem.Name = "шинаToolStripMenuItem";
-            this.шинаToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.шинаToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.шинаToolStripMenuItem.Text = "Шина";
             this.шинаToolStripMenuItem.Click += new System.EventHandler(this.шинаToolStripMenuItem_Click);
             // 
@@ -587,54 +636,6 @@
             this.сохранитьОтчетToolStripMenuItem.Size = new System.Drawing.Size(110, 20);
             this.сохранитьОтчетToolStripMenuItem.Text = "Сохранить отчет";
             this.сохранитьОтчетToolStripMenuItem.Click += new System.EventHandler(this.сохранитьОтчетToolStripMenuItem_Click);
-            // 
-            // zcRepairBarChart
-            // 
-            this.zcRepairBarChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.zcRepairBarChart.Location = new System.Drawing.Point(3, 3);
-            this.zcRepairBarChart.Name = "zcRepairBarChart";
-            this.zcRepairBarChart.ScrollGrace = 0D;
-            this.zcRepairBarChart.ScrollMaxX = 0D;
-            this.zcRepairBarChart.ScrollMaxY = 0D;
-            this.zcRepairBarChart.ScrollMaxY2 = 0D;
-            this.zcRepairBarChart.ScrollMinX = 0D;
-            this.zcRepairBarChart.ScrollMinY = 0D;
-            this.zcRepairBarChart.ScrollMinY2 = 0D;
-            this.zcRepairBarChart.Size = new System.Drawing.Size(755, 385);
-            this.zcRepairBarChart.TabIndex = 1;
-            this.zcRepairBarChart.UseExtendedPrintDialog = true;
-            // 
-            // zcFailureBarChart
-            // 
-            this.zcFailureBarChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.zcFailureBarChart.Location = new System.Drawing.Point(3, 3);
-            this.zcFailureBarChart.Name = "zcFailureBarChart";
-            this.zcFailureBarChart.ScrollGrace = 0D;
-            this.zcFailureBarChart.ScrollMaxX = 0D;
-            this.zcFailureBarChart.ScrollMaxY = 0D;
-            this.zcFailureBarChart.ScrollMaxY2 = 0D;
-            this.zcFailureBarChart.ScrollMinX = 0D;
-            this.zcFailureBarChart.ScrollMinY = 0D;
-            this.zcFailureBarChart.ScrollMinY2 = 0D;
-            this.zcFailureBarChart.Size = new System.Drawing.Size(755, 385);
-            this.zcFailureBarChart.TabIndex = 0;
-            this.zcFailureBarChart.UseExtendedPrintDialog = true;
-            // 
-            // zcTimeDiagram
-            // 
-            this.zcTimeDiagram.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.zcTimeDiagram.Location = new System.Drawing.Point(3, 3);
-            this.zcTimeDiagram.Name = "zcTimeDiagram";
-            this.zcTimeDiagram.ScrollGrace = 0D;
-            this.zcTimeDiagram.ScrollMaxX = 0D;
-            this.zcTimeDiagram.ScrollMaxY = 0D;
-            this.zcTimeDiagram.ScrollMaxY2 = 0D;
-            this.zcTimeDiagram.ScrollMinX = 0D;
-            this.zcTimeDiagram.ScrollMinY = 0D;
-            this.zcTimeDiagram.ScrollMinY2 = 0D;
-            this.zcTimeDiagram.Size = new System.Drawing.Size(755, 385);
-            this.zcTimeDiagram.TabIndex = 0;
-            this.zcTimeDiagram.UseExtendedPrintDialog = true;
             // 
             // Form1
             // 

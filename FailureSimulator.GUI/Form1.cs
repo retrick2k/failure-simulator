@@ -166,19 +166,20 @@ namespace FailureSimulator.GUI
 
             zcTimeDiagram.AxisChange();
 
-            float level = 0.5f;
-            float levelDelta = 2;
-            foreach (var item in timeDiagram)
-            {                
-                var lineStart = 0.0;
-                StatePoint previousElement = null;
-                Color previousColor = Color.Black;
-                foreach (var element in item.Value)
-                {
-                    
+            float level = 0;
+            float levelDelta = 1;
+            
+            StatePoint previousPoint = null;
+            Color previousColor = Color.Black;
 
+            foreach (var timeLine in timeDiagram)
+            {
+                var lineStart = 0;
+
+                foreach (var point in timeLine.Value)
+                {
                     Color color;
-                    switch(element.State)
+                    switch (point.State)
                     {
                         case ElementState.FAILURE:
                             color = Color.Red;
@@ -194,30 +195,28 @@ namespace FailureSimulator.GUI
                             break;
                     }
 
-                    if(previousElement != null)
+                    // Если предыдущая точка известна, то прочертить
+                    // линию цвета предыдущего состояния до текущего
+                    if (previousPoint != null)
                     {
-                        var previousLine = new LineObj(previousColor
-                            , previousElement.Time
-                            , level
-                            , element.Time
-                            , level);
-
-                        previousLine.Line.Style = System.Drawing.Drawing2D.DashStyle.Solid;
-                        // Добавить линию на график
-                        pane.GraphObjList.Add(previousLine);
+                        var line = new LineObj(previousColor, previousPoint.Time, level, point.Time, level);
+                        line.Line.Style = System.Drawing.Drawing2D.DashStyle.Solid;
+                        line.Line.Width = 10;
+                        pane.GraphObjList.Add(line);
                     }
-                   
-                    previousElement = element;
+
                     previousColor = color;
+                    previousPoint = point;
                 }
-                level += levelDelta;
+                if (timeLine.Value.Count > 1)
+                {
+                    level += levelDelta;
+                }
             }
 
-            //zcTimeDiagram.AxisChange();
-            zcTimeDiagram.Invalidate();
+            pane.IsBoundedRanges = true;
 
-            //pane.YAxis.Type = AxisType.Text;
-            //pane.YAxis.Scale.TextLabels =
+            zcTimeDiagram.Invalidate();            
         }
 
         private void DrawFailureBarChart(Core.Simulator.Report.Point[] points)
@@ -308,12 +307,15 @@ namespace FailureSimulator.GUI
         private void смешанныйToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TestingSystem = new Graph();
-            var A = TestingSystem.AddVertex(new Vertex("A", 0.35));
-            var B = TestingSystem.AddVertex(new Vertex("B", 0.123));
-            var C = TestingSystem.AddVertex(new Vertex("C", 0.228));
-            var D = TestingSystem.AddVertex(new Vertex("D", 0.0001));
-            var E = TestingSystem.AddVertex(new Vertex("E", 0.1));
-            var F = TestingSystem.AddVertex(new Vertex("F", 0.84));
+            var A = TestingSystem.AddVertex(new Vertex("A", 0.77));
+            var B = TestingSystem.AddVertex(new Vertex("B", 0.745));
+            var C = TestingSystem.AddVertex(new Vertex("C", 0.85));
+            var D = TestingSystem.AddVertex(new Vertex("D", 0.99));
+            var E = TestingSystem.AddVertex(new Vertex("E", 0.15));
+            var F = TestingSystem.AddVertex(new Vertex("F", 0.88));
+            var G = TestingSystem.AddVertex(new Vertex("G", 0.99));
+            var H = TestingSystem.AddVertex(new Vertex("H", 0.97));
+
 
             TestingSystem.AddEdge(A.Name, B.Name, 0.12);
             TestingSystem.AddEdge(B.Name, C.Name, 0.5);            
@@ -322,7 +324,24 @@ namespace FailureSimulator.GUI
             TestingSystem.AddEdge(B.Name, F.Name, 0.69);
             TestingSystem.AddEdge(F.Name, D.Name, 0.99);
 
+            TestingSystem.AddEdge(C.Name, G.Name, 0.8);
+            TestingSystem.AddEdge(G.Name, D.Name, 0.5);
+            TestingSystem.AddEdge(G.Name, H.Name, 0.78);
+            TestingSystem.AddEdge(D.Name, H.Name, 0.15);
+            TestingSystem.AddEdge(H.Name, E.Name, 0.45);
+
             ShowGraph(TestingSystem);
+        }
+
+        private void тестШинаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TestingSystem = new Graph();
+            var center1 = TestingSystem.AddVertex(new Vertex("center1", 0.9));
+            var center2 = TestingSystem.AddVertex(new Vertex("center2", 0.78));
+            var center3 = TestingSystem.AddVertex(new Vertex("center3", 0.49));
+            var center4 = TestingSystem.AddVertex(new Vertex("center4", 0.89));
+
+            
         }
     }
 }
