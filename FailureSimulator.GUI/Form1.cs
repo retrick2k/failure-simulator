@@ -164,6 +164,10 @@ namespace FailureSimulator.GUI
             var pane = zcTimeDiagram.GraphPane;
             pane.CurveList.Clear();
 
+            pane.Title.Text = "Временная диаграмма";
+            pane.XAxis.Title.Text = "Время";
+            pane.YAxis.Title.Text = "";
+
             zcTimeDiagram.AxisChange();
 
             float level = 0;
@@ -174,8 +178,6 @@ namespace FailureSimulator.GUI
 
             foreach (var timeLine in timeDiagram)
             {
-                var lineStart = 0;
-
                 foreach (var point in timeLine.Value)
                 {
                     Color color;
