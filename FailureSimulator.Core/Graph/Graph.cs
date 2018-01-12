@@ -239,7 +239,12 @@ namespace FailureSimulator.Core.Graph
             AssertVertexExists(vertexA);
             AssertVertexExists(vertexB);
 
-            return vertexA.GetEdge(vertexB);
+            
+            var edge =  vertexA.GetEdge(vertexB);
+            if (edge != null)
+                return edge;
+
+            return vertexB.GetEdge(vertexA);
         }
 
         /// <summary>
@@ -250,6 +255,8 @@ namespace FailureSimulator.Core.Graph
         /// <returns>Ребро, null, если ребра нет</returns>
         public Edge GetEdge(string vertexA, string vertexB)
         {
+            throw new NotImplementedException();
+
             AssertVertexExists(vertexA);
             AssertVertexExists(vertexB);
 

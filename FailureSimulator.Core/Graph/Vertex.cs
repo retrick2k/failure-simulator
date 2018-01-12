@@ -50,6 +50,7 @@ namespace FailureSimulator.Core.Graph
         {
             var edge = new Edge(this, other, failIntensity);
             _edges.Add(edge);
+            other._edges.Add(edge);
             return edge;
         }
 
@@ -81,7 +82,8 @@ namespace FailureSimulator.Core.Graph
             if(edge == null)
                 throw new ArgumentException($"Ребро {Name} - {otherName} отсутствует в графе");
 
-            _edges.Remove(edge);
+            edge.VertexFrom._edges.Remove(edge);
+            edge.VertexTo._edges.Remove(edge);
         }
 
 
@@ -98,7 +100,8 @@ namespace FailureSimulator.Core.Graph
             if(!_edges.Contains(edge))
                 throw new ArgumentException($"Ребро {Name} - {edge.VertexTo.Name} отсутствует в графе");
 
-            _edges.Remove(edge);
+            edge.VertexFrom._edges.Remove(edge);
+            edge.VertexTo._edges.Remove(edge);
         }
 
         /// <summary>

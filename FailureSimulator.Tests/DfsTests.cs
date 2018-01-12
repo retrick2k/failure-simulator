@@ -41,28 +41,30 @@ namespace FailureSimulator.Tests
 
             CollectionAssert.AreEqual(expectedPathes, (ICollection)pathes, comparer);
         }
-
+       
 
         [TestMethod]
-        public void FindPath_2()
+        public void LoopTest()
         {
             var graph = new Graph();
             var v0 = graph.AddVertex(new Vertex("0", 0));
             var v1 = graph.AddVertex(new Vertex("1", 0));
             var v2 = graph.AddVertex(new Vertex("2", 0));
             var v3 = graph.AddVertex(new Vertex("3", 0));
-            graph.AddEdge("0", "1"); graph.AddEdge("1", "0");
-            graph.AddEdge("0", "2"); graph.AddEdge("2", "0");
-            graph.AddEdge("2", "1"); graph.AddEdge("1", "2");
-            graph.AddEdge("1", "3"); graph.AddEdge("3", "1");
+            var v4 = graph.AddVertex(new Vertex("4", 0));
+            graph.AddEdge("0", "1");
+            graph.AddEdge("1", "2");
+            graph.AddEdge("2", "3");
+            graph.AddEdge("3", "4");
+            graph.AddEdge("4", "0");
 
             var pathfinder = new DfsPathFinder();
-            var pathes = pathfinder.FindAllPathes(graph, "3", "2");
+            var pathes = pathfinder.FindAllPathes(graph, "0", "2");
             var expectedPathes = new List<List<Vertex>>()
             {
 
-                new List<Vertex>() {v3, v1, v0, v2},
-                new List<Vertex>() {v3, v1, v2}
+                new List<Vertex>() {v0, v1, v2 },
+                new List<Vertex>() {v0, v4, v3, v2}
             };
 
             CollectionAssert.AreEqual(expectedPathes, (ICollection)pathes, comparer);

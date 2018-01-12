@@ -5,12 +5,8 @@
     /// </summary>
     public class Edge : IGraphUnit
     {
-        // Костыль, но исключительно чтобы можно было выводить имена вида
-        // от -> до
-        private Vertex _vertexFrom;
              
-        
-        public string Name => $"{_vertexFrom} -> {VertexTo.Name}";
+        public string Name => $"{VertexFrom} <-> {VertexTo.Name}";
 
         /// <summary>
         /// Интенсивность отказов всей связи
@@ -28,10 +24,15 @@
         public Vertex VertexTo { get; private set; }
 
 
+        /// <summary>
+        /// Вершина, из которой направлено ребро
+        /// </summary>
+        public Vertex VertexFrom { get; private set; }
+
         public Edge(Vertex from, Vertex to, double failIntensity = 0)
         {
 
-            _vertexFrom = from;
+            VertexFrom = from;
             VertexTo = to;
             FailIntensity = failIntensity;
         }
