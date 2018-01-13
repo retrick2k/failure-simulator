@@ -29,6 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.симуляцияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.тестовыеДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.тестШинаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.шинаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.смешанныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.начатьСимуляциюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.запуститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ненадежныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tcGraphTab = new System.Windows.Forms.TabControl();
             this.tpGraph = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -71,19 +80,30 @@
             this.zcRepairBarChart = new ZedGraph.ZedGraphControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.zcFailureBarChart = new ZedGraph.ZedGraphControl();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.симуляцияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.тестовыеДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.тестШинаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.шинаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.смешанныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.начатьСимуляциюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.запуститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сохранитьОтчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.btnUseDefaultSettings = new System.Windows.Forms.Button();
+            this.btnSaveSettings = new System.Windows.Forms.Button();
+            this.cbRepair = new System.Windows.Forms.CheckBox();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.rbFifoRepairQueueFactory = new System.Windows.Forms.RadioButton();
+            this.rbFastFirstReqairQueueFactory = new System.Windows.Forms.RadioButton();
+            this.rbImportantFirstRepairQueueFactory = new System.Windows.Forms.RadioButton();
+            this.rbLifoRepairQueueFactory = new System.Windows.Forms.RadioButton();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.nudRepairIntensity = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.nudRepairTeamsCount = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.nudBarChartCount = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.nudMaxTime = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.nudNumRuns = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.надежныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.кольцоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.tcGraphTab.SuspendLayout();
             this.tpGraph.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -98,9 +118,91 @@
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.groupBox11.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRepairIntensity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRepairTeamsCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBarChartCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMaxTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNumRuns)).BeginInit();
             this.SuspendLayout();
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.симуляцияToolStripMenuItem,
+            this.начатьСимуляциюToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(769, 24);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // симуляцияToolStripMenuItem
+            // 
+            this.симуляцияToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.тестовыеДанныеToolStripMenuItem});
+            this.симуляцияToolStripMenuItem.Name = "симуляцияToolStripMenuItem";
+            this.симуляцияToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.симуляцияToolStripMenuItem.Text = "Граф";
+            // 
+            // тестовыеДанныеToolStripMenuItem
+            // 
+            this.тестовыеДанныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.тестШинаToolStripMenuItem,
+            this.шинаToolStripMenuItem,
+            this.смешанныйToolStripMenuItem,
+            this.ненадежныйToolStripMenuItem,
+            this.надежныйToolStripMenuItem,
+            this.кольцоToolStripMenuItem});
+            this.тестовыеДанныеToolStripMenuItem.Name = "тестовыеДанныеToolStripMenuItem";
+            this.тестовыеДанныеToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.тестовыеДанныеToolStripMenuItem.Text = "Создать готовый";
+            // 
+            // тестШинаToolStripMenuItem
+            // 
+            this.тестШинаToolStripMenuItem.Name = "тестШинаToolStripMenuItem";
+            this.тестШинаToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.тестШинаToolStripMenuItem.Text = "Звезда";
+            this.тестШинаToolStripMenuItem.Click += new System.EventHandler(this.тестШинаToolStripMenuItem_Click);
+            // 
+            // шинаToolStripMenuItem
+            // 
+            this.шинаToolStripMenuItem.Name = "шинаToolStripMenuItem";
+            this.шинаToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.шинаToolStripMenuItem.Text = "Шина";
+            this.шинаToolStripMenuItem.Click += new System.EventHandler(this.шинаToolStripMenuItem_Click);
+            // 
+            // смешанныйToolStripMenuItem
+            // 
+            this.смешанныйToolStripMenuItem.Name = "смешанныйToolStripMenuItem";
+            this.смешанныйToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.смешанныйToolStripMenuItem.Text = "Смешанный";
+            this.смешанныйToolStripMenuItem.Click += new System.EventHandler(this.смешанныйToolStripMenuItem_Click);
+            // 
+            // начатьСимуляциюToolStripMenuItem
+            // 
+            this.начатьСимуляциюToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.запуститьToolStripMenuItem});
+            this.начатьСимуляциюToolStripMenuItem.Name = "начатьСимуляциюToolStripMenuItem";
+            this.начатьСимуляциюToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
+            this.начатьСимуляциюToolStripMenuItem.Text = "Симуляция";
+            // 
+            // запуститьToolStripMenuItem
+            // 
+            this.запуститьToolStripMenuItem.Name = "запуститьToolStripMenuItem";
+            this.запуститьToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.запуститьToolStripMenuItem.Text = "Запустить";
+            this.запуститьToolStripMenuItem.Click += new System.EventHandler(this.запуститьToolStripMenuItem_Click);
+            // 
+            // ненадежныйToolStripMenuItem
+            // 
+            this.ненадежныйToolStripMenuItem.Name = "ненадежныйToolStripMenuItem";
+            this.ненадежныйToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ненадежныйToolStripMenuItem.Text = "Ненадежный";
+            this.ненадежныйToolStripMenuItem.Click += new System.EventHandler(this.ненадежныйToolStripMenuItem_Click);
             // 
             // tcGraphTab
             // 
@@ -109,12 +211,13 @@
             this.tcGraphTab.Controls.Add(this.tabPage1);
             this.tcGraphTab.Controls.Add(this.tabPage3);
             this.tcGraphTab.Controls.Add(this.tabPage4);
+            this.tcGraphTab.Controls.Add(this.tabPage5);
             this.tcGraphTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tcGraphTab.Location = new System.Drawing.Point(3, 16);
+            this.tcGraphTab.Location = new System.Drawing.Point(0, 24);
             this.tcGraphTab.Name = "tcGraphTab";
             this.tcGraphTab.SelectedIndex = 0;
-            this.tcGraphTab.Size = new System.Drawing.Size(769, 417);
-            this.tcGraphTab.TabIndex = 0;
+            this.tcGraphTab.Size = new System.Drawing.Size(769, 402);
+            this.tcGraphTab.TabIndex = 3;
             // 
             // tpGraph
             // 
@@ -124,36 +227,40 @@
             this.tpGraph.Location = new System.Drawing.Point(4, 22);
             this.tpGraph.Name = "tpGraph";
             this.tpGraph.Padding = new System.Windows.Forms.Padding(3);
-            this.tpGraph.Size = new System.Drawing.Size(761, 391);
+            this.tpGraph.Size = new System.Drawing.Size(761, 376);
             this.tpGraph.TabIndex = 0;
             this.tpGraph.Text = "Граф системы";
             this.tpGraph.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.groupBox9);
             this.groupBox2.Controls.Add(this.groupBox8);
-            this.groupBox2.Location = new System.Drawing.Point(412, 169);
+            this.groupBox2.Location = new System.Drawing.Point(407, 169);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(337, 213);
+            this.groupBox2.Size = new System.Drawing.Size(343, 196);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Характеристики элементов системы";
             // 
             // groupBox9
             // 
+            this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox9.Controls.Add(this.tbEdgeFailIntensity);
             this.groupBox9.Controls.Add(this.label10);
             this.groupBox9.Location = new System.Drawing.Point(6, 113);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(325, 94);
+            this.groupBox9.Size = new System.Drawing.Size(331, 77);
             this.groupBox9.TabIndex = 1;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Связь";
             // 
             // tbEdgeFailIntensity
             // 
-            this.tbEdgeFailIntensity.Location = new System.Drawing.Point(188, 13);
+            this.tbEdgeFailIntensity.Location = new System.Drawing.Point(194, 13);
             this.tbEdgeFailIntensity.Name = "tbEdgeFailIntensity";
             this.tbEdgeFailIntensity.Size = new System.Drawing.Size(131, 20);
             this.tbEdgeFailIntensity.TabIndex = 4;
@@ -175,21 +282,21 @@
             this.groupBox8.Controls.Add(this.label8);
             this.groupBox8.Location = new System.Drawing.Point(6, 19);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(325, 88);
+            this.groupBox8.Size = new System.Drawing.Size(331, 88);
             this.groupBox8.TabIndex = 0;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Узел";
             // 
             // tbVertexFailIntensity
             // 
-            this.tbVertexFailIntensity.Location = new System.Drawing.Point(188, 57);
+            this.tbVertexFailIntensity.Location = new System.Drawing.Point(193, 57);
             this.tbVertexFailIntensity.Name = "tbVertexFailIntensity";
             this.tbVertexFailIntensity.Size = new System.Drawing.Size(131, 20);
             this.tbVertexFailIntensity.TabIndex = 3;
             // 
             // tbVertexNameCh
             // 
-            this.tbVertexNameCh.Location = new System.Drawing.Point(188, 22);
+            this.tbVertexNameCh.Location = new System.Drawing.Point(193, 22);
             this.tbVertexNameCh.Name = "tbVertexNameCh";
             this.tbVertexNameCh.Size = new System.Drawing.Size(131, 20);
             this.tbVertexNameCh.TabIndex = 2;
@@ -214,13 +321,14 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox6.Controls.Add(this.cbVertexChoosingMode);
             this.groupBox6.Controls.Add(this.gbVertexChoosingMode);
             this.groupBox6.Controls.Add(this.label7);
             this.groupBox6.Controls.Add(this.label6);
             this.groupBox6.Controls.Add(this.tbFinishVertex);
             this.groupBox6.Controls.Add(this.tbStartVertex);
-            this.groupBox6.Location = new System.Drawing.Point(412, 6);
+            this.groupBox6.Location = new System.Drawing.Point(407, 6);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(343, 157);
             this.groupBox6.TabIndex = 2;
@@ -236,13 +344,12 @@
             this.cbVertexChoosingMode.TabIndex = 8;
             this.cbVertexChoosingMode.Text = "Режим выбора вершины";
             this.cbVertexChoosingMode.UseVisualStyleBackColor = true;
-            this.cbVertexChoosingMode.CheckedChanged += new System.EventHandler(this.cbVertexChoosingMode_CheckedChanged);
+            this.cbVertexChoosingMode.CheckedChanged += new System.EventHandler(this.cbVertexChoosingMode_CheckedChanged_1);
             // 
             // gbVertexChoosingMode
             // 
             this.gbVertexChoosingMode.Controls.Add(this.rbSelectFinishVertex);
             this.gbVertexChoosingMode.Controls.Add(this.rbSelectStartVertex);
-            this.gbVertexChoosingMode.Enabled = false;
             this.gbVertexChoosingMode.Location = new System.Drawing.Point(167, 76);
             this.gbVertexChoosingMode.Name = "gbVertexChoosingMode";
             this.gbVertexChoosingMode.Size = new System.Drawing.Size(170, 69);
@@ -305,10 +412,13 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.graphHost);
             this.groupBox5.Location = new System.Drawing.Point(6, 6);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(400, 379);
+            this.groupBox5.Size = new System.Drawing.Size(395, 362);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Топология системы";
@@ -318,10 +428,9 @@
             this.graphHost.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graphHost.Location = new System.Drawing.Point(3, 16);
             this.graphHost.Name = "graphHost";
-            this.graphHost.Size = new System.Drawing.Size(394, 360);
+            this.graphHost.Size = new System.Drawing.Size(389, 343);
             this.graphHost.TabIndex = 0;
             this.graphHost.Text = "elementHost1";
-            this.graphHost.Move += new System.EventHandler(this.graphHost_Move);
             this.graphHost.Child = null;
             // 
             // tabPage2
@@ -331,13 +440,16 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(761, 391);
+            this.tabPage2.Size = new System.Drawing.Size(761, 376);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Отчет по симуляции";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Controls.Add(this.tbAvailabilityRate);
             this.groupBox4.Controls.Add(this.label4);
@@ -348,9 +460,9 @@
             this.groupBox4.Controls.Add(this.tbMaxFailureTime);
             this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Controls.Add(this.tbMinFailureTime);
-            this.groupBox4.Location = new System.Drawing.Point(298, 6);
+            this.groupBox4.Location = new System.Drawing.Point(301, 6);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(457, 318);
+            this.groupBox4.Size = new System.Drawing.Size(454, 361);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Замеры";
@@ -366,7 +478,9 @@
             // 
             // tbAvailabilityRate
             // 
-            this.tbAvailabilityRate.Location = new System.Drawing.Point(318, 164);
+            this.tbAvailabilityRate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAvailabilityRate.Location = new System.Drawing.Point(297, 163);
             this.tbAvailabilityRate.Name = "tbAvailabilityRate";
             this.tbAvailabilityRate.Size = new System.Drawing.Size(133, 20);
             this.tbAvailabilityRate.TabIndex = 8;
@@ -382,7 +496,9 @@
             // 
             // tbAverageRepairTime
             // 
-            this.tbAverageRepairTime.Location = new System.Drawing.Point(318, 127);
+            this.tbAverageRepairTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAverageRepairTime.Location = new System.Drawing.Point(297, 126);
             this.tbAverageRepairTime.Name = "tbAverageRepairTime";
             this.tbAverageRepairTime.Size = new System.Drawing.Size(133, 20);
             this.tbAverageRepairTime.TabIndex = 6;
@@ -398,7 +514,9 @@
             // 
             // tbAverageFailureTime
             // 
-            this.tbAverageFailureTime.Location = new System.Drawing.Point(318, 91);
+            this.tbAverageFailureTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAverageFailureTime.Location = new System.Drawing.Point(297, 90);
             this.tbAverageFailureTime.Name = "tbAverageFailureTime";
             this.tbAverageFailureTime.Size = new System.Drawing.Size(133, 20);
             this.tbAverageFailureTime.TabIndex = 4;
@@ -414,7 +532,9 @@
             // 
             // tbMaxFailureTime
             // 
-            this.tbMaxFailureTime.Location = new System.Drawing.Point(318, 56);
+            this.tbMaxFailureTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbMaxFailureTime.Location = new System.Drawing.Point(297, 55);
             this.tbMaxFailureTime.Name = "tbMaxFailureTime";
             this.tbMaxFailureTime.Size = new System.Drawing.Size(133, 20);
             this.tbMaxFailureTime.TabIndex = 2;
@@ -430,27 +550,32 @@
             // 
             // tbMinFailureTime
             // 
-            this.tbMinFailureTime.Location = new System.Drawing.Point(318, 19);
+            this.tbMinFailureTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbMinFailureTime.Location = new System.Drawing.Point(297, 18);
             this.tbMinFailureTime.Name = "tbMinFailureTime";
             this.tbMinFailureTime.Size = new System.Drawing.Size(133, 20);
             this.tbMinFailureTime.TabIndex = 0;
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox3.Controls.Add(this.lbPaths);
             this.groupBox3.Location = new System.Drawing.Point(6, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(286, 318);
+            this.groupBox3.Size = new System.Drawing.Size(286, 364);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Список путей";
             // 
             // lbPaths
             // 
+            this.lbPaths.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbPaths.FormattingEnabled = true;
-            this.lbPaths.Location = new System.Drawing.Point(6, 19);
+            this.lbPaths.Location = new System.Drawing.Point(3, 16);
             this.lbPaths.Name = "lbPaths";
-            this.lbPaths.Size = new System.Drawing.Size(274, 290);
+            this.lbPaths.Size = new System.Drawing.Size(280, 345);
             this.lbPaths.TabIndex = 0;
             // 
             // tabPage1
@@ -459,7 +584,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(761, 391);
+            this.tabPage1.Size = new System.Drawing.Size(838, 469);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Диаграмма восстановления";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -476,7 +601,7 @@
             this.zcTimeDiagram.ScrollMinX = 0D;
             this.zcTimeDiagram.ScrollMinY = 0D;
             this.zcTimeDiagram.ScrollMinY2 = 0D;
-            this.zcTimeDiagram.Size = new System.Drawing.Size(755, 385);
+            this.zcTimeDiagram.Size = new System.Drawing.Size(832, 463);
             this.zcTimeDiagram.TabIndex = 0;
             this.zcTimeDiagram.UseExtendedPrintDialog = true;
             // 
@@ -534,119 +659,280 @@
             this.zcFailureBarChart.TabIndex = 0;
             this.zcFailureBarChart.UseExtendedPrintDialog = true;
             // 
-            // groupBox1
+            // tabPage5
             // 
-            this.groupBox1.Controls.Add(this.tcGraphTab);
-            this.groupBox1.Location = new System.Drawing.Point(12, 27);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(775, 436);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
+            this.tabPage5.Controls.Add(this.groupBox10);
+            this.tabPage5.Controls.Add(this.groupBox7);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(761, 376);
+            this.tabPage5.TabIndex = 5;
+            this.tabPage5.Text = "Настройки";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // menuStrip1
+            // groupBox10
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.симуляцияToolStripMenuItem,
-            this.начатьСимуляциюToolStripMenuItem,
-            this.сохранитьОтчетToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(799, 24);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
+            this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox10.Controls.Add(this.btnUseDefaultSettings);
+            this.groupBox10.Controls.Add(this.btnSaveSettings);
+            this.groupBox10.Controls.Add(this.cbRepair);
+            this.groupBox10.Controls.Add(this.groupBox11);
+            this.groupBox10.Location = new System.Drawing.Point(346, 6);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(407, 366);
+            this.groupBox10.TabIndex = 1;
+            this.groupBox10.TabStop = false;
             // 
-            // симуляцияToolStripMenuItem
+            // btnUseDefaultSettings
             // 
-            this.симуляцияToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.загрузитьToolStripMenuItem,
-            this.сохранитьToolStripMenuItem,
-            this.тестовыеДанныеToolStripMenuItem});
-            this.симуляцияToolStripMenuItem.Name = "симуляцияToolStripMenuItem";
-            this.симуляцияToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.симуляцияToolStripMenuItem.Text = "Граф";
+            this.btnUseDefaultSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnUseDefaultSettings.Location = new System.Drawing.Point(87, 335);
+            this.btnUseDefaultSettings.Name = "btnUseDefaultSettings";
+            this.btnUseDefaultSettings.Size = new System.Drawing.Size(100, 25);
+            this.btnUseDefaultSettings.TabIndex = 5;
+            this.btnUseDefaultSettings.Text = "По умолчанию";
+            this.btnUseDefaultSettings.UseVisualStyleBackColor = true;
+            this.btnUseDefaultSettings.Click += new System.EventHandler(this.btnUseDefaultSettings_Click_1);
             // 
-            // загрузитьToolStripMenuItem
+            // btnSaveSettings
             // 
-            this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
-            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.загрузитьToolStripMenuItem.Text = "Загрузить";
+            this.btnSaveSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSaveSettings.Location = new System.Drawing.Point(6, 335);
+            this.btnSaveSettings.Name = "btnSaveSettings";
+            this.btnSaveSettings.Size = new System.Drawing.Size(75, 25);
+            this.btnSaveSettings.TabIndex = 4;
+            this.btnSaveSettings.Text = "Сохранить";
+            this.btnSaveSettings.UseVisualStyleBackColor = true;
+            this.btnSaveSettings.Click += new System.EventHandler(this.btnSaveSettings_Click_1);
             // 
-            // сохранитьToolStripMenuItem
+            // cbRepair
             // 
-            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            this.cbRepair.AutoSize = true;
+            this.cbRepair.Location = new System.Drawing.Point(6, 136);
+            this.cbRepair.Name = "cbRepair";
+            this.cbRepair.Size = new System.Drawing.Size(151, 17);
+            this.cbRepair.TabIndex = 3;
+            this.cbRepair.Text = "Есть ли восстановление";
+            this.cbRepair.UseVisualStyleBackColor = true;
             // 
-            // тестовыеДанныеToolStripMenuItem
+            // groupBox11
             // 
-            this.тестовыеДанныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.тестШинаToolStripMenuItem,
-            this.шинаToolStripMenuItem,
-            this.смешанныйToolStripMenuItem});
-            this.тестовыеДанныеToolStripMenuItem.Name = "тестовыеДанныеToolStripMenuItem";
-            this.тестовыеДанныеToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.тестовыеДанныеToolStripMenuItem.Text = "Создать готовый";
+            this.groupBox11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox11.Controls.Add(this.rbFifoRepairQueueFactory);
+            this.groupBox11.Controls.Add(this.rbFastFirstReqairQueueFactory);
+            this.groupBox11.Controls.Add(this.rbImportantFirstRepairQueueFactory);
+            this.groupBox11.Controls.Add(this.rbLifoRepairQueueFactory);
+            this.groupBox11.Location = new System.Drawing.Point(6, 9);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(394, 116);
+            this.groupBox11.TabIndex = 2;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Политики восстановления";
             // 
-            // тестШинаToolStripMenuItem
+            // rbFifoRepairQueueFactory
             // 
-            this.тестШинаToolStripMenuItem.Name = "тестШинаToolStripMenuItem";
-            this.тестШинаToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.тестШинаToolStripMenuItem.Text = "Звезда";
-            this.тестШинаToolStripMenuItem.Click += new System.EventHandler(this.тестШинаToolStripMenuItem_Click);
+            this.rbFifoRepairQueueFactory.AutoSize = true;
+            this.rbFifoRepairQueueFactory.Location = new System.Drawing.Point(6, 88);
+            this.rbFifoRepairQueueFactory.Name = "rbFifoRepairQueueFactory";
+            this.rbFifoRepairQueueFactory.Size = new System.Drawing.Size(48, 17);
+            this.rbFifoRepairQueueFactory.TabIndex = 3;
+            this.rbFifoRepairQueueFactory.TabStop = true;
+            this.rbFifoRepairQueueFactory.Text = "FIFO";
+            this.rbFifoRepairQueueFactory.UseVisualStyleBackColor = true;
             // 
-            // шинаToolStripMenuItem
+            // rbFastFirstReqairQueueFactory
             // 
-            this.шинаToolStripMenuItem.Name = "шинаToolStripMenuItem";
-            this.шинаToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.шинаToolStripMenuItem.Text = "Шина";
-            this.шинаToolStripMenuItem.Click += new System.EventHandler(this.шинаToolStripMenuItem_Click);
+            this.rbFastFirstReqairQueueFactory.AutoSize = true;
+            this.rbFastFirstReqairQueueFactory.Location = new System.Drawing.Point(6, 65);
+            this.rbFastFirstReqairQueueFactory.Name = "rbFastFirstReqairQueueFactory";
+            this.rbFastFirstReqairQueueFactory.Size = new System.Drawing.Size(175, 17);
+            this.rbFastFirstReqairQueueFactory.TabIndex = 2;
+            this.rbFastFirstReqairQueueFactory.TabStop = true;
+            this.rbFastFirstReqairQueueFactory.Text = "По скорости восстановления";
+            this.rbFastFirstReqairQueueFactory.UseVisualStyleBackColor = true;
             // 
-            // смешанныйToolStripMenuItem
+            // rbImportantFirstRepairQueueFactory
             // 
-            this.смешанныйToolStripMenuItem.Name = "смешанныйToolStripMenuItem";
-            this.смешанныйToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.смешанныйToolStripMenuItem.Text = "Смешанный";
-            this.смешанныйToolStripMenuItem.Click += new System.EventHandler(this.смешанныйToolStripMenuItem_Click);
+            this.rbImportantFirstRepairQueueFactory.AutoSize = true;
+            this.rbImportantFirstRepairQueueFactory.Location = new System.Drawing.Point(6, 42);
+            this.rbImportantFirstRepairQueueFactory.Name = "rbImportantFirstRepairQueueFactory";
+            this.rbImportantFirstRepairQueueFactory.Size = new System.Drawing.Size(99, 17);
+            this.rbImportantFirstRepairQueueFactory.TabIndex = 1;
+            this.rbImportantFirstRepairQueueFactory.TabStop = true;
+            this.rbImportantFirstRepairQueueFactory.Text = "По приоритету";
+            this.rbImportantFirstRepairQueueFactory.UseVisualStyleBackColor = true;
             // 
-            // начатьСимуляциюToolStripMenuItem
+            // rbLifoRepairQueueFactory
             // 
-            this.начатьСимуляциюToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.запуститьToolStripMenuItem,
-            this.настройкиToolStripMenuItem});
-            this.начатьСимуляциюToolStripMenuItem.Name = "начатьСимуляциюToolStripMenuItem";
-            this.начатьСимуляциюToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
-            this.начатьСимуляциюToolStripMenuItem.Text = "Симуляция";
+            this.rbLifoRepairQueueFactory.AutoSize = true;
+            this.rbLifoRepairQueueFactory.Location = new System.Drawing.Point(6, 19);
+            this.rbLifoRepairQueueFactory.Name = "rbLifoRepairQueueFactory";
+            this.rbLifoRepairQueueFactory.Size = new System.Drawing.Size(48, 17);
+            this.rbLifoRepairQueueFactory.TabIndex = 0;
+            this.rbLifoRepairQueueFactory.TabStop = true;
+            this.rbLifoRepairQueueFactory.Text = "LIFO";
+            this.rbLifoRepairQueueFactory.UseVisualStyleBackColor = true;
             // 
-            // запуститьToolStripMenuItem
+            // groupBox7
             // 
-            this.запуститьToolStripMenuItem.Name = "запуститьToolStripMenuItem";
-            this.запуститьToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.запуститьToolStripMenuItem.Text = "Запустить";
-            this.запуститьToolStripMenuItem.Click += new System.EventHandler(this.запуститьToolStripMenuItem_Click);
+            this.groupBox7.Controls.Add(this.nudRepairIntensity);
+            this.groupBox7.Controls.Add(this.label15);
+            this.groupBox7.Controls.Add(this.nudRepairTeamsCount);
+            this.groupBox7.Controls.Add(this.label14);
+            this.groupBox7.Controls.Add(this.nudBarChartCount);
+            this.groupBox7.Controls.Add(this.label13);
+            this.groupBox7.Controls.Add(this.nudMaxTime);
+            this.groupBox7.Controls.Add(this.label12);
+            this.groupBox7.Controls.Add(this.nudNumRuns);
+            this.groupBox7.Controls.Add(this.label11);
+            this.groupBox7.Location = new System.Drawing.Point(6, 6);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(334, 206);
+            this.groupBox7.TabIndex = 0;
+            this.groupBox7.TabStop = false;
             // 
-            // настройкиToolStripMenuItem
+            // nudRepairIntensity
             // 
-            this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.настройкиToolStripMenuItem.Text = "Настройки";
+            this.nudRepairIntensity.DecimalPlaces = 3;
+            this.nudRepairIntensity.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudRepairIntensity.Location = new System.Drawing.Point(214, 171);
+            this.nudRepairIntensity.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudRepairIntensity.Name = "nudRepairIntensity";
+            this.nudRepairIntensity.Size = new System.Drawing.Size(114, 20);
+            this.nudRepairIntensity.TabIndex = 9;
             // 
-            // сохранитьОтчетToolStripMenuItem
+            // label15
             // 
-            this.сохранитьОтчетToolStripMenuItem.Name = "сохранитьОтчетToolStripMenuItem";
-            this.сохранитьОтчетToolStripMenuItem.Size = new System.Drawing.Size(110, 20);
-            this.сохранитьОтчетToolStripMenuItem.Text = "Сохранить отчет";
-            this.сохранитьОтчетToolStripMenuItem.Click += new System.EventHandler(this.сохранитьОтчетToolStripMenuItem_Click);
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(7, 173);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(171, 13);
+            this.label15.TabIndex = 8;
+            this.label15.Text = "Интенсивность восстановления";
+            // 
+            // nudRepairTeamsCount
+            // 
+            this.nudRepairTeamsCount.Location = new System.Drawing.Point(214, 133);
+            this.nudRepairTeamsCount.Maximum = new decimal(new int[] {
+            1316134912,
+            2328,
+            0,
+            0});
+            this.nudRepairTeamsCount.Name = "nudRepairTeamsCount";
+            this.nudRepairTeamsCount.Size = new System.Drawing.Size(114, 20);
+            this.nudRepairTeamsCount.TabIndex = 7;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(7, 135);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(136, 13);
+            this.label14.TabIndex = 6;
+            this.label14.Text = "Число ремонтных бригад";
+            // 
+            // nudBarChartCount
+            // 
+            this.nudBarChartCount.Location = new System.Drawing.Point(214, 95);
+            this.nudBarChartCount.Maximum = new decimal(new int[] {
+            1316134912,
+            2328,
+            0,
+            0});
+            this.nudBarChartCount.Name = "nudBarChartCount";
+            this.nudBarChartCount.Size = new System.Drawing.Size(114, 20);
+            this.nudBarChartCount.TabIndex = 5;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(7, 97);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(200, 13);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "Количество столбцов в гистограммах";
+            // 
+            // nudMaxTime
+            // 
+            this.nudMaxTime.Location = new System.Drawing.Point(214, 57);
+            this.nudMaxTime.Maximum = new decimal(new int[] {
+            1316134912,
+            2328,
+            0,
+            0});
+            this.nudMaxTime.Name = "nudMaxTime";
+            this.nudMaxTime.Size = new System.Drawing.Size(114, 20);
+            this.nudMaxTime.TabIndex = 3;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(7, 59);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(202, 13);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "Максимальное время одной итерации";
+            // 
+            // nudNumRuns
+            // 
+            this.nudNumRuns.Location = new System.Drawing.Point(214, 18);
+            this.nudNumRuns.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
+            this.nudNumRuns.Name = "nudNumRuns";
+            this.nudNumRuns.Size = new System.Drawing.Size(114, 20);
+            this.nudNumRuns.TabIndex = 1;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(7, 20);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(199, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Количество запусков моделирования";
+            // 
+            // надежныйToolStripMenuItem
+            // 
+            this.надежныйToolStripMenuItem.Name = "надежныйToolStripMenuItem";
+            this.надежныйToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.надежныйToolStripMenuItem.Text = "Надежный";
+            this.надежныйToolStripMenuItem.Click += new System.EventHandler(this.надежныйToolStripMenuItem_Click);
+            // 
+            // кольцоToolStripMenuItem
+            // 
+            this.кольцоToolStripMenuItem.Name = "кольцоToolStripMenuItem";
+            this.кольцоToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.кольцоToolStripMenuItem.Text = "Кольцо";
+            this.кольцоToolStripMenuItem.Click += new System.EventHandler(this.кольцоToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(799, 472);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(769, 426);
+            this.Controls.Add(this.tcGraphTab);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(785, 465);
             this.Name = "Form1";
             this.Text = "Симулятор отказов";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.tcGraphTab.ResumeLayout(false);
             this.tpGraph.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -666,33 +952,57 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRepairIntensity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRepairTeamsCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBarChartCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMaxTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNumRuns)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tcGraphTab;
-        private System.Windows.Forms.TabPage tpGraph;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem симуляцияToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem начатьСимуляциюToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem запуститьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem сохранитьОтчетToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem тестовыеДанныеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem тестШинаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem шинаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem смешанныйToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ненадежныйToolStripMenuItem;
+        private System.Windows.Forms.TabControl tcGraphTab;
+        private System.Windows.Forms.TabPage tpGraph;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.TextBox tbEdgeFailIntensity;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.TextBox tbVertexFailIntensity;
+        private System.Windows.Forms.TextBox tbVertexNameCh;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.CheckBox cbVertexChoosingMode;
+        private System.Windows.Forms.GroupBox gbVertexChoosingMode;
+        private System.Windows.Forms.RadioButton rbSelectFinishVertex;
+        private System.Windows.Forms.RadioButton rbSelectStartVertex;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox tbFinishVertex;
+        private System.Windows.Forms.TextBox tbStartVertex;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Integration.ElementHost graphHost;
+        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbAvailabilityRate;
         private System.Windows.Forms.Label label4;
@@ -703,34 +1013,37 @@
         private System.Windows.Forms.TextBox tbMaxFailureTime;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbMinFailureTime;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Integration.ElementHost graphHost;
-        private System.Windows.Forms.ToolStripMenuItem тестовыеДанныеToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem тестШинаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem шинаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem смешанныйToolStripMenuItem;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.TextBox tbFinishVertex;
-        private System.Windows.Forms.TextBox tbStartVertex;
-        private System.Windows.Forms.GroupBox gbVertexChoosingMode;
-        private System.Windows.Forms.RadioButton rbSelectFinishVertex;
-        private System.Windows.Forms.RadioButton rbSelectStartVertex;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ListBox lbPaths;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox tbEdgeFailIntensity;
-        private System.Windows.Forms.TextBox tbVertexFailIntensity;
-        private System.Windows.Forms.TextBox tbVertexNameCh;
-        private System.Windows.Forms.CheckBox cbVertexChoosingMode;
-        private ZedGraph.ZedGraphControl zcRepairBarChart;
-        private ZedGraph.ZedGraphControl zcFailureBarChart;
+        private System.Windows.Forms.TabPage tabPage1;
         private ZedGraph.ZedGraphControl zcTimeDiagram;
+        private System.Windows.Forms.TabPage tabPage3;
+        private ZedGraph.ZedGraphControl zcRepairBarChart;
+        private System.Windows.Forms.TabPage tabPage4;
+        private ZedGraph.ZedGraphControl zcFailureBarChart;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Button btnUseDefaultSettings;
+        private System.Windows.Forms.Button btnSaveSettings;
+        private System.Windows.Forms.CheckBox cbRepair;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.RadioButton rbFifoRepairQueueFactory;
+        private System.Windows.Forms.RadioButton rbFastFirstReqairQueueFactory;
+        private System.Windows.Forms.RadioButton rbImportantFirstRepairQueueFactory;
+        private System.Windows.Forms.RadioButton rbLifoRepairQueueFactory;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.NumericUpDown nudRepairIntensity;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown nudRepairTeamsCount;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.NumericUpDown nudBarChartCount;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.NumericUpDown nudMaxTime;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown nudNumRuns;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ToolStripMenuItem надежныйToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem кольцоToolStripMenuItem;
     }
 }
 
